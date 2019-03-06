@@ -12,5 +12,6 @@
   "dependencies": {
     "asciidoctor-reveal.js": "^2.0.0",
     "highlight.js": "^9.15.6",
+    "mathjax": "^2.7.5"
   }
 }

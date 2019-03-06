@@ -9,12 +9,27 @@
 :revealjs_fragmentInURL: true
 :revealjs_history: true
 :highlightjs-theme: node_modules/highlight.js/styles/github.css
+:revealjs_plugin_math: enabled
+:revealjs_plugin_highlight: enabled
+:revealjs_plugin_markdown: enabled
+:revealjs_plugin_multiplex: enabled
+:revealjs_plugin_pdf: enabled
+:revealjs_plugins: reveal-plugins.js
+:revealjs_plugins_configuration: reveal-plugins-config.js
 
 == Slide One
 
 * Foo
 * Bar
 * World
+
+== Slide math
+
+\[\begin{aligned}
+					\dot{x} &amp; = \sigma(y-x) \\
+					\dot{y} &amp; = \rho x - y - xz \\
+					\dot{z} &amp; = -\beta z + xy
+\end{aligned} \]
 
 [.red.background]
 == Slide One
