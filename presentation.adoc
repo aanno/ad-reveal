@@ -1,0 +1,110 @@
+= Title Slide
+:customcss: my-css.css
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: assets
+:revealjs_theme: solarized
+:revealjs_slideNumber: h.v
+:revealjs_fragments: true
+:revealjs_fragmentInURL: true
+:highlightjs-theme: node_modules/highlight.js/styles/github.css
+
+== Slide One
+
+* Foo
+* Bar
+* World
+
+[.red.background]
+== Slide One
+
+Is very red
+
+[background-color="yellow"]
+== Slide Three
+
+Is very yellow
+
+[%notitle]
+== Grand Announcement
+
+image::cover.jpg[canvas,size=contain]
+
+# * Grand Announcement (and no title)
+
+[%notitle]
+== The Great Goat
+
+image::https://upload.wikimedia.org/wikipedia/commons/b/b2/Hausziege_04.jpg[canvas,size=contain]
+
+[%notitle,background-iframe="https://www.youtube.com/embed/LaApqL4QjH8?rel=0&start=3&enablejsapi=1&autoplay=1&loop=1&controls=0&modestbranding=1"]
+== a youtube video
+
+[transition=zoom, %notitle]
+== Zoom zoom
+
+This slide will override the presentation transition and zoom!
+
+[transition-speed=fast, %notitle]
+== Speed
+
+Choose from three transition speeds: default, fast or slow!
+
+== Slide Four
+
+[%step]
+* this
+* is
+* revealed
+* gradually
+
+
+
+== Slide Five
+
+Uses highlighted code
+
+[source, python]
+----
+print "Hello World"
+----
+
+[state=topic]
+== Epic Topic
+
+* kskjskj
+
+
+== Slide Five
+
+WARNING: This presentation is dangerous!
+
+
+== Slide Five
+
+[source,perl]
+----
+print "$0: hello world\n"
+----
+
+== Slide Six
+
+Top slide
+
+=== Slide Six.One
+
+This is a vertical subslide
+
+[.important-text]
+== Slide Title
+
+* Some
+* Information
+
+[role="important-text"]
+== Slide Title
+
+* Some
+* Information
+
+
