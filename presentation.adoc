@@ -11,7 +11,8 @@
 :highlightjs-theme: node_modules/highlight.js/styles/github.css
 :revealjs_plugin_math: enabled
 :revealjs_plugin_highlight: enabled
-:revealjs_plugin_markdown: enabled
+// must be enabled manually (tp)
+:revealjs_plugin_markdown: disabled
 :revealjs_plugin_multiplex: enabled
 :revealjs_plugin_pdf: enabled
 :revealjs_plugins: reveal-plugins.js
