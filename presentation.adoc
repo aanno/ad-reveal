@@ -17,29 +17,13 @@
 :revealjs_plugin_pdf: enabled
 :revealjs_plugins: reveal-plugins.js
 :revealjs_plugins_configuration: reveal-plugins-config.js
-
-// http://blog.schauderhaft.de/2018/07/23/footer-in-revealjs-from-asciidoc/
-++++
-<div id="schauderhaft-footer" class="footer">
-     <span class="element">#cool-talk</span>
-     <span class="element">@some-conf</span>
-     <span class="element">@jensschauder</span>
-</div>
-++++
-
-++++
- <script type="text/javascript">
-     window.addEventListener("load", function() {
-    
-         revealDiv = document.querySelector("body div.reveal")
-         footer = document.getElementById("schauderhaft-footer");
-         revealDiv.appendChild(footer);
-    
-     } );
- </script>
-++++
+:twitter-tag: @jensschauder
+:conference-tag: @JUGNBG
+:talk-tag: #sd-jdbc
 
 == Slide One
+
+include::footer.ad[]
 
 * Foo
 * Bar
