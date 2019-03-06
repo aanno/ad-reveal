@@ -7,6 +7,7 @@
 :revealjs_slideNumber: h.v
 :revealjs_fragments: true
 :revealjs_fragmentInURL: true
+:revealjs_history: true
 :highlightjs-theme: node_modules/highlight.js/styles/github.css
 
 == Slide One
