@@ -32,6 +32,19 @@
 					\dot{z} &amp; = -\beta z + xy
 \end{aligned} \]
 
+== Slide markdown
+
+// https://github.com/hakimel/reveal.js/
+++++
+<section data-markdown>
+	<script type="text/template">
+	<!-- .slide: data-background="#ff0000" -->
+### Markdown content
+* [test](https://github.com/hakimel/reveal.js/)
+	</script>
+</section>
+++++
+
 [.red.background]
 == Slide One
 
