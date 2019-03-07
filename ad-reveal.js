@@ -7,5 +7,9 @@ asciidoctorRevealjs.register()
 
 // Convert the document 'presentation.adoc' using the reveal.js converter
 var options = {safe: 'safe', backend: 'revealjs'};
-asciidoctor.convertFile('presentation.adoc', options); 
 
+process.argv.forEach(function (val, index, array) {
+    if (index >= 2) {
+        asciidoctor.convertFile(val, options);
+    }
+});
