@@ -32,17 +32,21 @@ include::footer.ad[]
 
 == Warum Java 11?
 
-// fotnote:[AdoptOpenJDK hat andere Supportziele]
-
-* Java 11 hat Oracle 'long-term support'
-  (bis 07/2023)
+* Java 11 hat Oracle 'long-term support' +
+  (bis 07/2023)footnote:[AdoptOpenJDK hat andere Supportziele]
 * Garbage Collector
 ** GC Interface
 ** Parallel full GC for G1
+
+=== Warum Java 11? (2)
+
 * jshell
 * TLS 1.3
 * Unicode 10.0.0
 * HiDPI (Swing)
+
+=== Warum Java 11? (Tools)
+
 * Compiler
 ** neue API
 ** neue Optionen, u.a. linter
@@ -56,6 +60,9 @@ include::footer.ad[]
 * New reactive streams APIs
 * Improved streams/predicate/optional APIs
 * Improved system process API
+
+=== Java 11: APIs (2)
+
 * Improved files API
 * Support for HTTP/2
 * Standard Java Async HTTP client
@@ -65,7 +72,8 @@ include::footer.ad[]
 
 * Nutze OpenJDK (statt Oracle VM)
 * Eingeschränkte Reflection
-* Fehlende Java (Enterprise) APIs (und Implementierung)
+* Fehlende Module
+* Neuer Byte Code
 * Java Module System
 * Build Tools
 * WAR, EAR etc.
@@ -74,26 +82,51 @@ include::footer.ad[]
 
 * GPLv2+CPE
 * Kein Flag `-XX:+UnlockCommercialFeatures`
-* Fehlende Module:
-** `javax.*` JavaFX
-** `java.jnlp` Web Start
-** `jdk.jfr` Flight Recorder
-** `jdk.management.*` +
-   JMX (MBean, MXBean) Implementierung
-** `jdk.packager.services`
-** `jdk.snmp` SNMP Support
+* `jdk.packager.services`
+* `jdk.snmp` SNMP Support
 
-== Nicht mehr in Java 11
+=== OpenJDK: Fehlende Module
 
-* `java.xml.ws` JAX-WS, SAAJ
-* `java.xml.bind` JAXB
-* `java.activation` JAF
-* `java.xml.ws.annotation` Common Annotations
-* `java.corba` CORBA
-* `java.transaction` JTA
-* `java.se.ee` (JEE)
-* `jdk.xml.ws` Tools für JAX-WS
-* `jdk.xml.bind` Tools für JAXB
+* *JavaFX* `+javax.*+`
+* *Web Start* `java.jnlp`
+* *Flight Recorder* `jdk.jfr`
+*  *JMX (MBean, MXBean) Impl* +
+  `+jdk.management.*+`
+
+== Reflection
+
+* `com.sun.Unsafe`
+
+== Nicht mehr in Java 11: Module
+
+* *JAX-WS*, *SAAJ* `java.xml.ws`
+* *JAXB* `java.xml.bind`
+* *JAF* `java.activation`
+* `java.xml.ws.annotation`
+* *CORBA* `java.corba`
+* *JTA* `java.transaction`
+* *JEE* `java.se.ee`
+
+=== Nicht mehr in Java 11: Tools
+
+* *Tools für JAX-WS* `jdk.xml.ws`
+* *Tools für JAXB* `jdk.xml.bind`
+
+== Neuer Byte Code
+
+=== Libraries: BCE
+
+*
+
+=== Libraries: Spring
+
+* springframework: *5.1.x*
+* spring boot: *2.1.x*
+* spring cloud
+
+=== Tools
+
+* Jacoco -> Cobertura
 
 == Referenzen
 
