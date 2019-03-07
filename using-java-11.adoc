@@ -1,0 +1,103 @@
+= Using Java 11
+:customcss: my-css.css
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: assets
+:revealjs_theme: solarized
+:revealjs_slideNumber: h.v
+:revealjs_fragments: true
+:revealjs_fragmentInURL: true
+:revealjs_history: true
+:highlightjs-theme: node_modules/highlight.js/styles/github.css
+:revealjs_plugin_math: enabled
+:revealjs_plugin_highlight: enabled
+// must be enabled manually (tp)
+:revealjs_plugin_markdown: disabled
+:revealjs_plugin_multiplex: enabled
+:revealjs_plugin_pdf: enabled
+:revealjs_plugins: reveal-plugins.js
+:revealjs_plugins_configuration: reveal-plugins-config.js
+:twitter-tag: Thomas Pasch
+:conference-tag: SiteOS Teammeeting
+:talk-tag: Using Java 11
+
+== Übersicht
+
+include::footer.ad[]
+
+* Warum Java 11?
+* Herausforderungen
+* Module System
+* Enterprise App unter Java 11
+
+== Warum Java 11?
+
+// fotnote:[AdoptOpenJDK hat andere Supportziele]
+
+* Java 11 hat Oracle 'long-term support'
+  (bis 07/2023)
+* Garbage Collector
+** GC Interface
+** Parallel full GC for G1
+* jshell
+* TLS 1.3
+* Unicode 10.0.0
+* HiDPI (Swing)
+* Compiler
+** neue API
+** neue Optionen, u.a. linter
+** AOT
+* `jlink` etc.
+
+=== Java 11: APIs
+
+* Local variable type inference (`var` keyword)
+* New native unmodifiable collections APIs
+* New reactive streams APIs
+* Improved streams/predicate/optional APIs
+* Improved system process API
+* Improved files API
+* Support for HTTP/2
+* Standard Java Async HTTP client
+* Multi-release JARs
+
+== Herausforderungen
+
+* Nutze OpenJDK (statt Oracle VM)
+* Eingeschränkte Reflection
+* Fehlende Java (Enterprise) APIs (und Implementierung)
+* Java Module System
+* Build Tools
+* WAR, EAR etc.
+
+== OpenJDK (vs. Oracle JVM)
+
+* GPLv2+CPE
+* Kein Flag `-XX:+UnlockCommercialFeatures`
+* Fehlende Module:
+** `javax.*` JavaFX
+** `java.jnlp` Web Start
+** `jdk.jfr` Flight Recorder
+** `jdk.management.*` +
+   JMX (MBean, MXBean) Implementierung
+** `jdk.packager.services`
+** `jdk.snmp` SNMP Support
+
+== Nicht mehr in Java 11
+
+* `java.xml.ws` JAX-WS, SAAJ
+* `java.xml.bind` JAXB
+* `java.activation` JAF
+* `java.xml.ws.annotation` Common Annotations
+* `java.corba` CORBA
+* `java.transaction` JTA
+* `java.se.ee` (JEE)
+* `jdk.xml.ws` Tools für JAX-WS
+* `jdk.xml.bind` Tools für JAXB
+
+== Referenzen
+
+* https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
+* Oracle Java Magazine: What's new in Java 11? +
+  http://www.javamagazine.mozaicreader.com/NovemberDecember2018/Default/39/0/4097899
+* https://docs.oracle.com/en/java/javase/11/tools/javac.html
