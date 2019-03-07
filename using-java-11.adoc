@@ -90,12 +90,29 @@ include::footer.ad[]
 * *JavaFX* `+javax.*+`
 * *Web Start* `java.jnlp`
 * *Flight Recorder* `jdk.jfr`
-*  *JMX (MBean, MXBean) Impl* +
+*  *(wenige) JMX Teile* +
   `+jdk.management.*+`
 
 == Reflection
 
 * `com.sun.Unsafe`
+* Eingeschränkte Reflection = Höhere Sicherheit
+* Inkompatibel mit vielen Libraries
+
+=== Illegal Access
+
+[source]
+----
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.xnio.nio.NioXnio$2 +
+(file:/home/tpasch/.m2/repository/org/jboss/xnio/xnio-nio/3.3.8.Final/ +
+xnio-nio-3.3.8.Final.jar) +
+to constructor sun.nio.ch.EPollSelectorProvider()
+----
+
+=== Ausschalten
+
+* `--illegal-access=warn`
 
 == Nicht mehr in Java 11: Module
 
@@ -116,17 +133,32 @@ include::footer.ad[]
 
 === Libraries: BCE
 
-*
+* javassist *3.24.1-GA*
+* asm *7.0*
+* byte-buddy *1.9.6*
+* aspectjweaver *1.9.2*
+* classmate *1.4.0*
 
 === Libraries: Spring
 
-* springframework: *5.1.x*
-* spring boot: *2.1.x*
+* springframework *5.1.x*
+* spring boot *2.1.x*
 * spring cloud
+* snakeyaml *1.23*
+
+=== Libraries: Misc
+
+* hibernate-jpa-2.1-api *1.0.2*
+* javax.transaction-api *1.3.0*
+* HikariCP *3.3.0*
 
 === Tools
 
 * Jacoco -> Cobertura
+
+== Maven
+
+* `mvn dependency:tree`
 
 == Referenzen
 
