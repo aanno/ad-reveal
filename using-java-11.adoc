@@ -200,6 +200,41 @@ jboss-transaction-api_1.2_spec-1.0.1.Final.jar:
 jboss.transaction.api.1.2.spec: Invalid module name: '1' is not a Java identifier
 ----
 
+=== Unvisible
+
+Fehlendes `requires`
+
+[source]
+----
+[ERROR] .../BankAccount.java:[6,21] package
+org.hibernate.annotations is not visible
+----
+
+=== Not Read
+
+Fehlendes `requires`
+
+[source]
+----
+[ERROR] (package org.zalando.problem
+is declared in the unnamed module,
+but module org.zalando.problem does not read it)
+----
+
+=== Reads from both
+
+Split JAR problem
+
+[source]
+----
+[ERROR] the unnamed module reads package
+org.zalando.problem
+from both problem and jackson.datatype.problem
+[ERROR] module spring.tx reads package
+org.zalando.problem
+from both jackson.datatype.problem and problem
+----
+
 == Referenzen
 
 * Migration Spring Boot App +
