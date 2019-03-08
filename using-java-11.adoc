@@ -267,11 +267,25 @@ org.zalando.problem
 from both jackson.datatype.problem and problem
 ----
 
-== Referenzen
+== Referenzen Migration
 
 * Migration Spring Boot App +
   https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
+* https://blog.codefx.org/java/java-11-migration-guide/
+* https://medium.com/criciumadev/java-10-migration-5d853f5b5f7e
+
+=== Referenzen Java 11
+
 * Oracle Java Magazine: What's new in Java 11? +
   http://www.javamagazine.mozaicreader.com/NovemberDecember2018/Default/39/0/4097899
 * Flags/Options `javac` +
   https://docs.oracle.com/en/java/javase/11/tools/javac.html
+
+=== Referenzen Java Module System
+
+* https://www.informatik-aktuell.de/entwicklung/programmiersprachen/java-9-das-neue-modulsystem-jigsaw-tutorial.html
+
+=== Referenzen Support und Lizenz
+
+* Übersicht Anbieter
+  https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo/preview#
