@@ -71,8 +71,8 @@ include::footer.ad[]
 == Herausforderungen
 
 * Nutze OpenJDK (statt Oracle VM)
-* Eingeschränkte Reflection
 * Fehlende Module
+* Eingeschränkte Reflection
 * Neuer Byte Code
 * Java Module System
 * Build Tools
@@ -92,6 +92,21 @@ include::footer.ad[]
 * *Flight Recorder* `jdk.jfr`
 *  *(wenige) JMX Teile* +
   `+jdk.management.*+`
+
+== Nicht mehr in Java 11: Module
+
+* *JAX-WS*, *SAAJ* `java.xml.ws`
+* *JAXB* `java.xml.bind`
+* *JAF* `java.activation`
+* `java.xml.ws.annotation`
+* *CORBA* `java.corba`
+* *JTA* `java.transaction`
+* *JEE* `java.se.ee`
+
+=== Nicht mehr in Java 11: Tools
+
+* *Tools für JAX-WS* `jdk.xml.ws`
+* *Tools für JAXB* `jdk.xml.bind`
 
 == Reflection
 
@@ -114,36 +129,23 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 
 * `--illegal-access=warn`
 
-== Nicht mehr in Java 11: Module
-
-* *JAX-WS*, *SAAJ* `java.xml.ws`
-* *JAXB* `java.xml.bind`
-* *JAF* `java.activation`
-* `java.xml.ws.annotation`
-* *CORBA* `java.corba`
-* *JTA* `java.transaction`
-* *JEE* `java.se.ee`
-
-=== Nicht mehr in Java 11: Tools
-
-* *Tools für JAX-WS* `jdk.xml.ws`
-* *Tools für JAXB* `jdk.xml.bind`
-
 == Neuer Byte Code
 
 === Libraries: BCE
 
 * javassist *3.24.1-GA*
-* asm *7.0*
+* asm *7.0* (6.2)
 * byte-buddy *1.9.6*
 * aspectjweaver *1.9.2*
 * classmate *1.4.0*
+* mockito-core *2.20.0*
 
 === Libraries: Spring
 
 * springframework *5.1.x*
+* spring security *5.1.x*
 * spring boot *2.1.x*
-* spring cloud
+* spring cloud *Greenwich*
 * snakeyaml *1.23*
 
 === Libraries: Misc
@@ -160,9 +162,25 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 
 * `mvn dependency:tree`
 
+== Java 11 und Java 8
+
+=== Module Name für Java 8
+
+[source]
+----
+[WARNING] Can't extract module name from +
+spring-cloud-cloudfoundry-connector-2.0.4.RELEASE.jar: +
+Provider class com.fasterxml.jackson.core.JsonFactory not in module
+[WARNING] Can't extract module name from +
+jboss-transaction-api_1.2_spec-1.0.1.Final.jar: +
+jboss.transaction.api.1.2.spec: Invalid module name: '1' is not a Java identifier
+----
+
 == Referenzen
 
-* https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
+* Migration Spring Boot App +
+  https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
 * Oracle Java Magazine: What's new in Java 11? +
   http://www.javamagazine.mozaicreader.com/NovemberDecember2018/Default/39/0/4097899
-* https://docs.oracle.com/en/java/javase/11/tools/javac.html
+* Flags/Options `javac` +
+  https://docs.oracle.com/en/java/javase/11/tools/javac.html
