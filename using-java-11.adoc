@@ -174,17 +174,49 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 * javax.activation-api *1.3.0*
 * javax.transaction-api *1.3.0*
 * hibernate-jpa-2.1-api *1.0.2*
-* HikariCP *3.3.0*
+* HikariCP *3.3.0* (optional?)
 
 === Tools
 
 * Jacoco -> Cobertura
+
+== Module System
+
+* Ziel: Modularisierung Java Plattform
+* Java Entwicklung?
+* Neue Semantic für JARs
+* Keine Versionierung
+* `--module-path` statt `--classpath`
+
+=== `module-info.java`
+
+* DSL für Modul Abhängigkeiten
+* `open` für Deep Reflection
+* `requires` für Module Import
+* `exports` für Module Re-exports
+
+=== `module-info.java` (Services)
+
+* `provides <interface> with <class>`
+* `uses <interface>`
+* `ServiceLoader` zum runtime Dispatch
+
+=== Beispiel `module-info.java`
 
 == Maven
 
 * maven-compiler-plugin *3.8.0*
 * `mvn dependency:tree`
 * `source`, `target` -> `release`
+
+=== Automodules
+
+[source]
+----
+[INFO] Required filename-based automodules detected.
+Please don't publish this project to a
+public artifact repository!
+----
 
 == Java 11 und Java 8
 
