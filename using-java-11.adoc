@@ -47,11 +47,9 @@ include::footer.ad[]
 
 === Warum Java 11? (Tools)
 
-* Compiler
-** neue API
-** neue Optionen, u.a. linter
-** AOT
-* `jlink` etc.
+* `jlink`
+* `jimage`
+* `jmod`
 
 === Java 11: APIs
 
@@ -68,6 +66,28 @@ include::footer.ad[]
 * Standard Java Async HTTP client
 * Multi-release JARs
 
+=== Java 11 Compiler
+
+* neue API
+* neue Optionen, u.a. linter
+* AOT (Graalvm), `jaotc`
+* `source`, `target` -> `release`
+
+=== Deprecated und nun entfernt
+
+* `{Runtime, System}.runFinalizersOnExit`
+* Einige Methoden von `SecurityManager`
+* `Thread.destroy`
+* `Thread.stop`
+
+=== Deprecated in Java 11
+
+* Nashorn JS Engine
+* Applet API
+* SAX -> SAX2
+* `finalize`
+* `pack200`
+
 == Herausforderungen
 
 * Nutze OpenJDK (statt Oracle VM)
@@ -82,8 +102,9 @@ include::footer.ad[]
 
 * GPLv2+CPE
 * Kein Flag `-XX:+UnlockCommercialFeatures`
-* `jdk.packager.services`
-* `jdk.snmp` SNMP Support
+* Fehlende Module:
+** `jdk.packager.services`
+** `jdk.snmp` SNMP Support
 
 === OpenJDK: Fehlende Module
 
@@ -119,9 +140,9 @@ include::footer.ad[]
 [source]
 ----
 WARNING: An illegal reflective access operation has occurred
-WARNING: Illegal reflective access by org.xnio.nio.NioXnio$2 +
-(file:/home/tpasch/.m2/repository/org/jboss/xnio/xnio-nio/3.3.8.Final/ +
-xnio-nio-3.3.8.Final.jar) +
+WARNING: Illegal reflective access by org.xnio.nio.NioXnio$2
+(file:/home/tpasch/.m2/repository/org/jboss/xnio/xnio-nio/3.3.8.Final/
+xnio-nio-3.3.8.Final.jar)
 to constructor sun.nio.ch.EPollSelectorProvider()
 ----
 
@@ -150,8 +171,9 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 
 === Libraries: Misc
 
-* hibernate-jpa-2.1-api *1.0.2*
+* javax.activation-api *1.3.0*
 * javax.transaction-api *1.3.0*
+* hibernate-jpa-2.1-api *1.0.2*
 * HikariCP *3.3.0*
 
 === Tools
@@ -160,7 +182,9 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 
 == Maven
 
+* maven-compiler-plugin *3.8.0*
 * `mvn dependency:tree`
+* `source`, `target` -> `release`
 
 == Java 11 und Java 8
 
@@ -168,11 +192,11 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 
 [source]
 ----
-[WARNING] Can't extract module name from +
-spring-cloud-cloudfoundry-connector-2.0.4.RELEASE.jar: +
+[WARNING] Can't extract module name from
+spring-cloud-cloudfoundry-connector-2.0.4.RELEASE.jar:
 Provider class com.fasterxml.jackson.core.JsonFactory not in module
-[WARNING] Can't extract module name from +
-jboss-transaction-api_1.2_spec-1.0.1.Final.jar: +
+[WARNING] Can't extract module name from
+jboss-transaction-api_1.2_spec-1.0.1.Final.jar:
 jboss.transaction.api.1.2.spec: Invalid module name: '1' is not a Java identifier
 ----
 
