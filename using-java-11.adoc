@@ -205,9 +205,11 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 
 === `module-info.java`
 
-* DSL für Modul Abhängigkeiten
+DSL für Modul Abhängigkeiten
+
 * `open` für Deep Reflection
 * `requires` für Module Import
+* `requires transitive` für Abhängigkeiten
 * `exports` für Module Re-exports
 
 === Beispiel
@@ -216,7 +218,7 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 [source,java]
 ----
 open module io.github.jhipster.sample {
-    requires org.apache.commons.lang3;
+    requires transitive org.apache.commons.lang3;
     requires org.apache.logging.log4j;
     requires slf4j.api;
     requires jdk.unsupported;
@@ -444,6 +446,13 @@ from both problem and jackson.datatype.problem
 org.zalando.problem
 from both jackson.datatype.problem and problem
 ----
+
+== Fazit
+
+* Semantikänderung JARs
+* Keine Versionierung
+* Keine Scopes
+* Keine Hierachie
 
 == Referenzen Migration
 
