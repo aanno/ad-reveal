@@ -196,6 +196,13 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 * Keine Versionierung
 * `--module-path` statt `--classpath`
 
+=== Was ist ein Module?
+
+* JAR
+* `--module-path`
+* `module-info.java`
+* Alle packages kommen nur 1x vor
+
 === `module-info.java`
 
 * DSL für Modul Abhängigkeiten
@@ -255,7 +262,6 @@ module com.mysql.jdbc {
 
 === Module Info
 
-.Table
 |===
 |**Zugriff...** 	|**Compile-Zeit** 	|**Reflection (Shallow)** 	|**Reflection (Deep)**
 |_exports pkg_ 	|+ 	|+ 	|-
@@ -268,7 +274,63 @@ opens pkg_ 	    |+ 	|+ 	|+
 
 * `public` ist nur noch im Module sichtbar
 * Globale Sichtbarkeit: `public` *und* `exports`
-* Semantikänderung für JARs
+* Semantikänderung für JARs!
+
+== Split JAR
+
+* 1 Packetname darf nur in 1 Module/JARs sein
+* Sonst Fehler (compile/runtime)
+* Semantikänderung für JARs!
+
+== Änderungen am Module System
+
+|===
+|**Man kann ...**	|**Flag**
+|weitere Packages exportieren	|`--add-exports`
+|eine neue Read-Beziehung einführen 	|`--add-reads`
+|ein weiteres Modul dazuladen 	|`--add-modules` +
+|Module mit Klassen patchen 	|`--patch-module`
+|===
+
+=== Praxis
+
+* Viral
+* Nützlich für Tests (?)
+* Keine Lösung, wenn viele Module betroffen
+
+== Class- und Module Path
+
+* Modulekategorien
+
+=== _Unnamed Module_
+
+* Alle Inhalte des Classpaths
+* Zugriff auf sämtliche Module
+* Exportiert alles
+
+=== _Explicit Module_
+
+* `module-info.java`
+* *kein* Zugriff aufs _Unnamed Module_
+
+=== _Automatic Module_
+
+* JAR im Modulepath
+* *kein* `module-info.java`
+* Zugriff auf sämtliche Module
+* Zugriff aufs _Unnamed Module_
+* Exportiert alles
+
+=== _Open Module_
+
+* Wie _Explicit Module_
+* Exportiert alles für Deep Reflection
+
+=== _Named Module_
+
+* _Explicit Module_ oder
+* _Open Module_ oder
+* _Automatic Module_
 
 == Maven
 
