@@ -203,12 +203,6 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 * `requires` für Module Import
 * `exports` für Module Re-exports
 
-=== `module-info.java` (Services)
-
-* `provides <interface> with <class>`
-* `uses <interface>`
-* `ServiceLoader` zum runtime Dispatch
-
 === Beispiel
 
 .module-info.java
@@ -221,6 +215,60 @@ open module io.github.jhipster.sample {
     requires jdk.unsupported;
 }
 ----
+
+=== `module-info.java` (Services)
+
+* `provides <interface> with <class>`
+* `uses <interface>`
+* `ServiceLoader` zum runtime Dispatch
+
+=== Beispiel Uses
+
+.module-info.java
+[source,java]
+----
+module java.sql {
+   // Definiert Schnittstelle und exportiert sie
+   uses java.sql.Driver;
+   exports java.sql;
+}
+----
+
+=== Beispiel Provides
+
+.module-info.java
+[source,java]
+----
+module com.mysql.jdbc {
+   requires java.sql;
+
+   // Implementiert Schnittstelle?
+   provides java.sql.Driver with com.mysql.jdbc.Driver;
+}
+----
+
+== Sichtbarkeit
+
+* Compile Time
+* Shallow Reflection
+* Deep Reflection
+
+=== Module Info
+
+.Table
+|===
+|**Zugriff...** 	|**Compile-Zeit** 	|**Reflection (Shallow)** 	|**Reflection (Deep)**
+|_exports pkg_ 	|+ 	|+ 	|-
+|_opens pkg_ 	    |- 	|+ 	|+
+|_exports pkg und
+opens pkg_ 	    |+ 	|+ 	|+
+|===
+
+=== Konsequenzen
+
+* `public` ist nur noch im Module sichtbar
+* Globale Sichtbarkeit: `public` *und* `exports`
+* Semantikänderung für JARs
 
 == Maven
 
@@ -355,8 +403,10 @@ from both jackson.datatype.problem and problem
 
 === Referenzen Support und Lizenz
 
-* Übersicht Anbieter
+* Übersicht Anbieter +
   https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo/preview#
+* AdoptOpenJDK +
+  https://adoptopenjdk.net/
 
 === Referenzen JEE 8 und Eclipse
 

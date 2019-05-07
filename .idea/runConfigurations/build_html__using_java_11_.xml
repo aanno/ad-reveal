@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="build html [using-java-11]" type="NodeJSConfigurationType" node-parameters="ad-reveal.js using-java-11.adoc" working-dir="$PROJECT_DIR$">
+    <method v="2" />
+  </configuration>
+</component>
