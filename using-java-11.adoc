@@ -176,6 +176,14 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 * hibernate-jpa-2.1-api *1.0.2*
 * HikariCP *3.3.0* (optional?)
 
+=== Libraries: Java EE
+
+* `javax` / `jakarta` Problem
+* `javax.activation:activation` -> +
+  `jakarta.activation:jakarta.activation-api`
+* `javax.xml.bind:jaxb-api` -> +
+  `jakarta.xml.bind:jakarta.xml.bind-api`
+
 === Tools
 
 * Jacoco -> Cobertura
@@ -201,15 +209,82 @@ to constructor sun.nio.ch.EPollSelectorProvider()
 * `uses <interface>`
 * `ServiceLoader` zum runtime Dispatch
 
-=== Beispiel `module-info.java`
+=== Beispiel
+
+.module-info.java
+[source,java]
+----
+open module io.github.jhipster.sample {
+    requires org.apache.commons.lang3;
+    requires org.apache.logging.log4j;
+    requires slf4j.api;
+    requires jdk.unsupported;
+}
+----
 
 == Maven
 
 * maven-compiler-plugin *3.8.0*
-* `mvn dependency:tree`
-* `source`, `target` -> `release`
+* `mvn dependency:tree` zur Analyse
+* compiler: `source`, `target` -> `release`
 
-=== Automodules
+=== Probleme
+
+* Dependency Resolution
+* Austausch von Dependencies
+* JAXB
+
+== Gradle
+
+* Build files in Kotlin oder Groovy
+* Agent (schneller Builds)
+* _Dependency Resolution konfigurierbar_
+* `gradle dependencies` zur Analyse
+* Kompatibel zu Maven Repositories
+* Aktive Weiterentwicklung
+
+=== Dependency Resolution
+
+.build.gradle
+[source,groovy]
+----
+configurations.all {
+    resolutionStrategy {
+        preferProjectModules()
+
+        setForcedModules(
+            "org.javassist:javassist:3.24.1-GA"
+        )
+
+        eachDependency {
+            if (requested.group.equals("javax.xml.bind") && requested.name.equals("jaxb-api")) {
+                useTarget([
+                    "group"  : "jakarta.xml.bind",
+                    "name"   : "jakarta.xml.bind-api",
+                    "version": jaxbApi
+                ])
+            }
+        }
+    }
+}
+----
+
+== Java 11 und Java 8
+
+* Fehlermeldungen Compiler
+
+=== Module Name für Java 8
+
+[source]
+----
+[WARNING] Can't extract module name from
+spring-cloud-cloudfoundry-connector-2.0.4.RELEASE.jar:
+[WARNING] Can't extract module name from
+jboss-transaction-api_1.2_spec-1.0.1.Final.jar:
+jboss.transaction.api.1.2.spec: Invalid module name: '1' is not a Java identifier
+----
+
+=== Automodules (1)
 
 [source]
 ----
@@ -218,19 +293,12 @@ Please don't publish this project to a
 public artifact repository!
 ----
 
-== Java 11 und Java 8
+=== Automodules (2)
 
-=== Module Name für Java 8
-
-[source]
-----
-[WARNING] Can't extract module name from
-spring-cloud-cloudfoundry-connector-2.0.4.RELEASE.jar:
-Provider class com.fasterxml.jackson.core.JsonFactory not in module
-[WARNING] Can't extract module name from
-jboss-transaction-api_1.2_spec-1.0.1.Final.jar:
-jboss.transaction.api.1.2.spec: Invalid module name: '1' is not a Java identifier
-----
+* Lösung: `META-INF/MANIFEST.MF`
+* Attribute +
+  `Automatic-Module-Name: de.siteos.whatever`
+* In **alle** eigenen JARs einfügen!
 
 === Unvisible
 
@@ -289,3 +357,14 @@ from both jackson.datatype.problem and problem
 
 * Übersicht Anbieter
   https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo/preview#
+
+=== Referenzen JEE 8 und Eclipse
+
+* https://www.heise.de/developer/artikel/Jakarta-EE-Der-Anfang-vom-Ende-oder-die-Chance-fuer-einen-Neuanfang-4413537.html
+* https://www.heise.de/developer/meldung/Kommentar-Java-EE-ist-am-Ende-4413601.html
+* https://www.heise.de/developer/meldung/Kommentar-Eine-Chance-fuer-Jakarta-EE-4413990.html
+
+=== Referenzen Asciidoctor
+
+* https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+* https://asciidoctor.org/docs/user-manual/

@@ -1,0 +1,833 @@
+import io.swagger.codegen.DefaultGenerator
+import io.swagger.codegen.config.CodegenConfigurator
+import org.gradle.internal.os.OperatingSystem
+
+buildscript {
+
+    def repos = (project.hasProperty('repos')) ? project.repos : null
+    def kotlinVersion = (project.hasProperty('kotlinVersion')) ? project.kotlinVersion : null
+    def nexusRepo = repos == 'nexus'
+    def localRepo = repos == 'local'
+    def publicRepo = repos == 'public'
+    def includeLocalMaven = (project.hasProperty('includeLocalMaven')) ?
+        Boolean.valueOf(project.includeLocalMaven) : true
+    def buildWars = (project.hasProperty('buildWars')) ?
+        Boolean.valueOf(project.buildWars) : true
+    def buildJar = (project.hasProperty('buildJar')) ?
+        Boolean.valueOf(project.buildJar) : true
+    def javacLint = (project.hasProperty('javacLint')) ?
+        Boolean.valueOf(project.buildJar) : true
+
+    repositories {
+        if (includeLocalMaven) {
+            mavenLocal()
+        }
+        if (nexusRepo) {
+            maven { url our_nexus }
+        }
+        if (localRepo) {
+            maven { url local_nexus }
+        }
+        if (publicRepo) {
+            mavenCentral()
+            maven { url "http://repo.spring.io/plugins-release" }
+            maven { url "https://plugins.gradle.org/m2/" }
+        }
+    }
+    dependencies {
+        // custom dependencies (tp)
+        classpath "com.google.guava:guava:27.0.1-jre"
+
+        // classpath files(".")
+        classpath "io.swagger:swagger-codegen:2.4.4"
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+        // classpath "org.springframework.boot:spring-boot-gradle-plugin:2.1.1.RELEASE"
+        classpath "io.spring.gradle:propdeps-plugin:0.0.10.RELEASE"
+        classpath "org.openapitools:openapi-generator-gradle-plugin:3.3.4"
+        classpath "org.openapitools:openapi-generator:3.3.4"
+        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:2.0.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlinVersion"
+
+        classpath group: 'io.swagger.core.v3', name: 'swagger-gradle-plugin', version: '2.0.7'
+
+
+        // TODO tp: dependencies of com.benjaminsproule.swagger
+        classpath "org.zalando:problem-spring-web:0.24.0-RC.0"
+        classpath "org.zalando:problem:0.22.0"
+
+        //jhipster-needle-gradle-buildscript-dependency - JHipster will add additional gradle build script plugins here
+    }
+}
+
+plugins {
+    // this must first?!?
+    id "java"
+    id "idea"
+    // id "application"
+    // id "distribution"
+
+    // custom plugins (tp)
+    id "org.javamodularity.moduleplugin" version "1.5.0"
+    id "com.benjaminsproule.swagger" version "1.0.6"
+    // classpath problem
+    id "com.redock.classpathtofile" version "0.0.1"
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.0.7"
+
+    id "maven-publish"
+    id "org.sonarqube" version "2.7"
+    id "net.ltgt.apt-eclipse" version "0.21"
+    id "net.ltgt.apt-idea" version "0.21"
+    id "net.ltgt.apt" version "0.21"
+    id "io.spring.dependency-management" version "1.0.7.RELEASE"
+    id 'org.liquibase.gradle' version '2.0.1'
+    //jhipster-needle-gradle-plugins - JHipster will add additional gradle plugins here
+}
+
+configurations {
+    codegenCli /* .extendsFrom(runtime) */
+    xjc
+}
+
+configurations.all {
+    resolutionStrategy {
+        preferProjectModules()
+
+        setForcedModules(
+            "org.javassist:javassist:3.24.1-GA"
+            , "org.yaml:snakeyaml:1.23"
+            , "org.ow2.asm:asm:7.0"
+            , "net.bytebuddy:byte-buddy:1.9.6"
+            , "org.aspectj:aspectjweaver:1.9.2"
+            , "javax.transaction:javax.transaction-api:1.3"
+            , "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final"
+            , "com.google.guava:guava:27.0.1-jre"
+            , "com.zaxxer:HikariCP:3.3.0"
+            , "com.fasterxml:classmate:1.4.0"
+
+            /*
+            , "org.mockito:mockito-core:>2.20"
+            , "org.hibernate:hibernate-envers:5.3.6.Final"
+            , "org.hibernate:hibernate-entitymanager:5.3.0.Beta1"
+            , "com.hazelcast:hazelcast:3.11.1"
+            , "com.hazelcast:hazelcast-spring:3.11.1"
+            , "org.springframework.boot:spring-boot-actuator-autoconfigure:$spring_boot_version"
+            , "org.springframework:spring-framework-bom:5.1.3.RELEASE"
+            , "org.springframework:spring-context-support:5.1.3.RELEASE"
+            , "org.springframework:spring-context:5.1.4.RELEASE"
+            , "org.springframework:spring-web:5.1.4.RELEASE"
+            , "org.springframework:spring-aspects:5.1.3.RELEASE"
+             */
+        )
+
+        eachDependency {
+            // javax.activation:activation:1.1.1
+            // jakarta.activation:jakarta.activation-api:1.2.1
+            if (requested.group.equals("jakarta.activation") &&
+                // We can't use jakarta as spring boot mail is not prepared for this (tp)
+                // hint: com.sun.activation.registries.LogSupport
+                (requested.name.startsWith("activation") || requested.name.startsWith("jakarta.activation"))) {
+                useTarget([
+                    "group"  : "javax.activation",
+                    "name"   : "javax.activation-api",
+                    "version": activationApi
+                ])
+            }
+            if (requested.group.equals("javax.annotation") && requested.name.equals("javax.annotation-api")) {
+                useTarget([
+                    "group"  : "jakarta.annotation",
+                    "name"   : "jakarta.annotation-api",
+                    "version": annotationApi
+                ])
+            }
+            if (requested.group.equals("javax.xml.bind") && requested.name.equals("jaxb-api")) {
+                useTarget([
+                    "group"  : "jakarta.xml.bind",
+                    "name"   : "jakarta.xml.bind-api",
+                    "version": jaxbApi
+                ])
+            }
+            // com.sun.xml.bind:jaxb-xjc:2.3.2
+            // com.sun.xml.bind:jaxb-core:2.3.0.1
+            if (requested.group.equals("com.sun.xml.bind") && requested.name.startsWith("jaxb-")) {
+                def libName = requested.name
+                if (libName.equals("jaxb-impl") || libName.equals("jaxb-core")) {
+                    libName = "jaxb-runtime"
+                }
+                useTarget([
+                    "group"  : "org.glassfish.jaxb",
+                    "name"   : libName,
+                    "version": jaxbVersion
+                ])
+            }
+            if (requested.group.equals("org.yaml") && requested.name.equals("snakeyaml")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": "1.23"
+                ])
+            }
+            if (requested.group.equals("org.springframework.boot") && requested.version.startsWith("2.0.")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": spring_boot_version
+                ])
+            }
+            if (requested.group.equals("org.aspectj")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": "1.9.2"
+                ])
+            }
+            if (requested.group.equals("net.bytebuddy") && requested.name.equals("byte-buddy")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": "1.9.6"
+                ])
+            }
+            if (requested.group.equals("com.google.guava") && requested.name.equals("guava")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": "27.0.1-jre"
+                ])
+            }
+            if (requested.group.equals("com.zaxxer") && requested.name.equals("HikariCP")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": "3.3.0"
+                ])
+            }
+            if (requested.group.equals("com.fasterxml") && requested.name.equals("classmate")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": "1.4.0"
+                ])
+            }
+            if (requested.group.equals("com.fasterxml.jackson.core")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": jackson_version
+                ])
+            }
+            // "org.liquibase:liquibase-core:$liquibase_version"
+            // "org.liquibase.ext:liquibase-hibernate5:${liquibase_hibernate5_version}"
+            if (requested.group.equals("org.liquibase") && requested.name.equals("liquibase-core")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": liquibase_version
+                ])
+            }
+            if (requested.group.equals("org.liquibase.ext") && requested.name.equals("liquibase-hibernate5")) {
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": liquibase_hibernate5_version
+                ])
+            }
+            /*
+            if (requested.group.equals("org.springframework.cloud") && requested.version.startsWith("2.0.")) {
+                useTarget([
+                    "group" : requested.group,
+                    "name" : requested.name,
+                    "version" : "2.1.0.RC2"
+                ])
+            }
+            if (requested.group.startsWith("org.springframework") && requested.version.startsWith("5.0.")) {
+                def version = "5.1.4.RELEASE"
+                if (name.equals("spring-context-support") || name.equals("spring-aspects")) {
+                    version = "5.1.3.RELEASE"
+                }
+                if (name.startsWith("spring-security")) {
+                    version = "5.1.2.RELEASE"
+                }
+                useTarget([
+                    "group" : requested.group,
+                    "name" : requested.name,
+                    "version" : version
+                ])
+            }
+             */
+            if (requested.group.startsWith("org.springframework.security") && requested.version.startsWith("5.0.")) {
+                def version = spring_security_version
+                useTarget([
+                    "group"  : requested.group,
+                    "name"   : requested.name,
+                    "version": version
+                ])
+            }
+        }
+    }
+
+    // java 11: multiple reads, ...
+    exclude group: "org.thymeleaf.extras", module: "thymeleaf-extras-java8time"
+    exclude group: "org.jboss.spec.javax.servlet", module: "jboss-servlet-api_3.1_spec"
+    exclude group: "org.jboss.spec.javax.annotation", module: "jboss-annotations-api_1.2_spec"
+    exclude group: "org.jboss.spec.javax.annotation", module: "jboss-annotations-api_1.3_spec"
+    exclude group: "org.jboss.spec.javax.transaction", module: "jboss-transaction-api_1.2_spec"
+    exclude group: "org.jboss.spec.javax.transaction", module: "jboss-transaction-api_1.3_spec"
+    exclude group: "org.jboss.narayana.jta", module: "jta"
+    exclude group: "javax.transaction", module: "jta"
+    exclude group: "xpp3", module: "xpp3"
+    exclude group: "xpp3", module: "xpp3_min"
+    exclude group: "jakarta.activation", module: "activation"
+    // exclude group: "com.sun.xml.bind", module: "jaxb-xjc"
+    exclude group: "com.sun.xml.bind", module: "jaxb-core"
+    exclude group: "com.sun.xml.bind", module: "jaxb-impl"
+
+    // ???: jcip: concurrency annotations like @NotThreadSafe
+    exclude group: "net.jcip", module: "jcip-annotations"
+    // ???: jsr305: software bug detection like @Nullable and @Nonnull
+    // exclude group: "com.google.code.findbugs", module: "jsr305"
+}
+
+def upload_repo(version) {
+    if (version.endsWith("-SNAPSHOT")) {
+        return upload_nexus_snapshots
+    }
+    return upload_nexus
+}
+
+def mvnLocalRepo() {
+    def result = System.getProperty('maven.repo.local')
+    if (!result) {
+        result = System.getProperty('user.home') + "/.m2/repository"
+    }
+    if (!result) {
+        throw new IllegalStateException()
+    }
+    return result
+}
+
+apply plugin: 'java'
+def javaVersion = 11
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+// Until JHipster supports JDK 9
+// assert System.properties['java.specification.version'] == '1.8'
+
+// custom plugins (tp)
+// apply plugin: "application"
+// apply plugin: "distribution"
+// apply plugin: "org.javamodularity.moduleplugin"
+
+// apply plugin: 'org.openapi.generator'
+
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+if (buildWars) {
+    apply plugin: 'war'
+}
+apply plugin: 'propdeps'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'idea'
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+        excludeDirs += files('node_modules')
+    }
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.github.jhipster:jhipster-dependencies:$jhipster_dependencies_version"
+        // mavenBom "org.springframework.security:spring-security-bom:$spring_security_version"
+        mavenBom "org.springframework:spring-framework-bom:$spring_framework_version"
+        // mavenBom "org.springframework.security:spring-security-bom:$spring_security_version"
+        // mavenBom "org.springframework.cloud:spring-cloud-starter:2.1.0.RC2"
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Greenwich.RELEASE"
+        mavenBom "org.springframework.cloud:spring-cloud-stream-dependencies:Fishtown.SR2"
+        mavenBom "org.glassfish.jaxb:jaxb-bom:$jaxbVersion"
+        //jhipster-needle-gradle-dependency-management - JHipster will add additional dependencies management here
+    }
+}
+
+defaultTasks 'bootRun'
+
+group = 'de.siteos.zap'
+version = '0.0.1-SNAPSHOT'
+
+description = ''
+
+// relative to BUILD classpath (tp)
+def projectName = name
+def projectGroup = group
+// def openapiInput = "$projectDir/src/dsl/swagger.json"
+def swaggerOutput = "$buildDir/generated-sources/swagger-ts-angular"
+def nexusRepo = repos == 'nexus'
+def localRepo = repos == 'local'
+def publicRepo = repos == 'public'
+println("repos: $repos, nexusRepo: $nexusRepo, publicRepo: $publicRepo, includeLocalMaven: $includeLocalMaven")
+
+/*
+application {
+    mainClassName = mainClass
+    // mainClassName = "de.siteos.pbdb.visualizer2/de.siteos.pbdb.visualizer2.Pbdbvisualizer2App"
+}
+ */
+
+/*
+openApiGenerate {
+    inputSpec = openapiInput
+    generatorName = "spring"
+    apiPackage = "de.siteos.pbdb.visualizer2.web.api"
+    modelPackage = "de.siteos.pbdb.visualizer2.web.api.model"
+    supportingFilesConstrainedTo = ["ApiUtil.java"]
+    validateSpec = true
+    configOptions = [
+        delegatePattern: true
+    ]
+}
+ */
+
+if (buildWars) {
+    bootWar {
+        enabled = buildWars
+        mainClassName = mainClass
+    }
+
+    war {
+        enabled = buildWars
+        classifier = 'original'
+    }
+}
+
+jar {
+    enabled = buildJar
+
+    manifest {
+        attributes(
+            'Main-Class': mainClass,
+            'Automatic-Module-Name': 'de.siteos.zap.zib',
+            'Implementation-Title': projectName,
+            'Implementation-Version': version,
+            'Implementation-Group': projectGroup,
+            'Implementation-Vendor': 'SiteOS AG, Munich',
+            'Implementation-Vendor-Id': 'de.siteos'
+        )
+    }
+}
+
+publishing {
+    publications {
+        zapzibservice(MavenPublication) {
+            // classifier = 'original'
+
+            from components.java
+            // from components.web
+            // artifact "build/libs/pbdbvisualizer2-$version-original.war"
+
+            // publish com.benjaminsproule.swagger generated swagger definitions
+            // artifact "$buildDir/generated/swagger/swagger.json"
+        }
+    }
+    repositories {
+        maven {
+            url = upload_repo(version)
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                username = "SiteOS"
+                password = "SiteOS"
+            }
+        }
+        maven {
+            url = mvnLocalRepo()
+        }
+    }
+}
+
+springBoot {
+    mainClassName = mainClass
+    buildInfo()
+}
+
+if (OperatingSystem.current().isWindows()) {
+    // https://stackoverflow.com/questions/40037487/the-filename-or-extension-is-too-long-error-using-gradle
+    task classpathJar(type: Jar) {
+        dependsOn configurations.runtime
+        appendix = 'classpath'
+
+        doFirst {
+            manifest {
+                attributes 'Class-Path': configurations.runtime.files.collect {
+                    it.toURI().toURL().toString().replaceFirst(/file:\/+/, '/').replaceAll(' ', '%20')
+                }.join(' ')
+            }
+        }
+    }
+
+    bootRun {
+        jvmArgs "--illegal-access=warn", "--show-module-resolution", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=50087"
+        dependsOn classpathJar
+        doFirst {
+            classpath = files("$buildDir/classes/java/main", "$buildDir/classes/kotlin/main",
+                "$buildDir/resources/main", classpathJar.archivePath)
+        }
+    }
+}
+
+test {
+    exclude '**/CucumberTest*'
+
+    // uncomment if the tests reports are not generated
+    // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
+    // ignoreFailures true
+    reports.html.enabled = false
+}
+
+task cucumberTest(type: Test) {
+    description = "Execute cucumber BDD tests."
+    group = "verification"
+    include '**/CucumberTest*'
+
+    // uncomment if the tests reports are not generated
+    // see https://github.com/jhipster/generator-jhipster/pull/2771 and https://github.com/jhipster/generator-jhipster/pull/4484
+    // ignoreFailures true
+    reports.html.enabled = false
+}
+
+check.dependsOn cucumberTest
+task testReport(type: TestReport) {
+    destinationDir = file("$buildDir/reports/tests")
+    reportOn test
+}
+
+task cucumberTestReport(type: TestReport) {
+    destinationDir = file("$buildDir/reports/tests")
+    reportOn cucumberTest
+}
+
+apply from: 'gradle/docker.gradle'
+apply from: 'gradle/sonar.gradle'
+// apply from: 'gradle/swagger.gradle'
+apply from: 'gradle/kotlin.gradle'
+//jhipster-needle-gradle-apply-from - JHipster will add additional gradle scripts to be applied here
+
+if (project.hasProperty('prod')) {
+    apply from: 'gradle/profile_prod.gradle'
+} else if (project.hasProperty('sm')) {
+    apply from: 'gradle/profile_sm.gradle'
+} else {
+    apply from: 'gradle/profile_dev.gradle'
+}
+
+
+if (project.hasProperty('zipkin')) {
+    apply from: 'gradle/zipkin.gradle'
+}
+
+if (!project.hasProperty('runList')) {
+    project.ext.runList = 'main'
+}
+
+project.ext.diffChangelogFile = 'src/main/resources/config/liquibase/changelog/' + new Date().format('yyyyMMddHHmmss') + '_changelog.xml'
+
+liquibase {
+    activities {
+        main {
+            driver 'oracle.jdbc.OracleDriver'
+            url 'jdbc:oracle:thin:@localhost:1521:zapzibservice'
+            username ''
+            password ''
+            changeLogFile 'src/main/resources/config/liquibase/master.xml'
+            defaultSchemaName ''
+            logLevel 'debug'
+            classpath 'src/main/resources/'
+        }
+        diffLog {
+            driver 'oracle.jdbc.OracleDriver'
+            url 'jdbc:oracle:thin:@localhost:1521:zapzibservice'
+            username ''
+            password ''
+            changeLogFile project.ext.diffChangelogFile
+            referenceUrl 'hibernate:spring:de.siteos.zap.zib.domain?dialect=org.hibernate.dialect.Oracle12cDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy'
+            defaultSchemaName ''
+            logLevel 'debug'
+            classpath "$buildDir/classes/java/main"
+            excludeObjects 'oauth_access_token, oauth_approvals, oauth_client_details, oauth_client_token, oauth_code, oauth_refresh_token'
+        }
+    }
+
+    runList = project.ext.runList
+}
+
+configurations {
+    providedRuntime
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+repositories {
+    if (includeLocalMaven) {
+        mavenLocal()
+    }
+    if (nexusRepo) {
+        maven { url our_nexus }
+    }
+    if (localRepo) {
+        maven { url local_nexus }
+    }
+    if (publicRepo) {
+        mavenCentral()
+        jcenter()
+    }
+    //jhipster-needle-gradle-repositories - JHipster will add additional repositories
+}
+
+dependencies {
+    codegenCli "io.swagger:swagger-codegen-cli:3.0.0-rc1"
+
+    // project specific dependencies
+    compile "org.glassfish:javax.json:1.1.4"
+    compile "javax.inject:javax.inject:1"
+    compile "com.google.code.gson:gson:2.8.5"
+    compile "javax.servlet:javax.servlet-api:4.0.1"
+
+    compile "org.springframework.cloud:spring-cloud-stream"
+    compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
+    compile "org.springframework.amqp:spring-amqp:2.1.5.RELEASE"
+    compile "org.springframework.amqp:spring-rabbit:2.1.5.RELEASE"
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: '2.1.4.RELEASE'
+    compile group: 'org.springframework.amqp', name: 'spring-amqp', version: '2.1.5.RELEASE'
+    compile group: 'org.springframework.integration', name: 'spring-integration-amqp', version: '5.1.4.RELEASE'
+    compile group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.1.5.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-stream-rabbit', version: '2.1.2.RELEASE'
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-stream-binder-rabbit', version: '2.1.2.RELEASE'
+    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-stream-binder-rabbit-test-support', version: '2.1.2.RELEASE'
+    compile group: 'org.springframework.amqp', name: 'spring-rabbit-test', version: '2.1.5.RELEASE'
+
+    compile 'de.vandermeer:asciitable:0.3.2'
+
+    // WebConfigurer uses UndertowOptions, hence
+    // compile "io.undertow:undertow-core"
+
+    // Oracle driver
+    /*
+    runtime("com.oracle.jdbc:ojdbc8:12.2.0.1") {
+        exclude group: "com.oracle.jdbc", module: "orai18n"
+        exclude group: "com.oracle.jdbc", module: "xmlparserv2"
+        exclude group: "com.oracle.jdbc", module: "oraclepki"
+        exclude group: "com.oracle.jdbc", module: "ons"
+        exclude group: "com.oracle.jdbc", module: "xdb6"
+        exclude group: "com.oracle.jdbc", module: "osdt_core"
+        exclude group: "com.oracle.jdbc", module: "osdt_cert"
+    }
+     */
+
+    // java 11 section (tp)
+    // jaxb
+    compile "jakarta.xml.bind:jakarta.xml.bind-api"
+    compile "org.glassfish.jaxb:jaxb-runtime"
+
+    compile "javax.annotation:javax.annotation-api:$annotationApi"
+    compile "javax.activation:javax.activation-api:$activationApi"
+
+    // jaxb again
+    annotationProcessor("com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.11") {
+        exclude group: "org.glassfish.jaxb", module: "jaxb-core"
+        // exclude group: "com.sun.xml.bind", module: "jaxb-xjc"
+    }
+    annotationProcessor "jakarta.xml.bind:jakarta.xml.bind-api"
+    annotationProcessor "org.glassfish.jaxb:jaxb-runtime"
+    annotationProcessor "javax.activation:javax.activation-api:$activationApi"
+
+    // jaxb again
+    xjc("com.github.jaxb-xew-plugin:jaxb-xew-plugin:1.11") {
+        exclude group: "org.glassfish.jaxb", module: "jaxb-core"
+        // exclude group: "com.sun.xml.bind", module: "jaxb-xjc"
+    }
+    xjc "jakarta.xml.bind:jakarta.xml.bind-api:$jaxbApi"
+    xjc "org.glassfish.jaxb:jaxb-xjc:$jaxbVersion"
+    xjc "org.glassfish.jaxb:jaxb-runtime:$jaxbVersion"
+    xjc "javax.activation:javax.activation-api:$activationApi"
+
+    // spring boot section (tp)
+    compile("org.springframework.boot:spring-boot-actuator:$spring_boot_version")
+    // compile("org.springframework.cloud:spring-cloud-starter:2.1.0.RC2")
+
+    // Use ", version: jhipster_dependencies_version, changing: true" if you want
+    // to use a SNAPSHOT release instead of a stable release
+    compile group: "io.github.jhipster", name: "jhipster-framework"
+    compile "org.springframework.boot:spring-boot-starter-cache"
+    compile "io.dropwizard.metrics:metrics-core"
+    compile "io.dropwizard.metrics:metrics-jcache:4.0.5"
+    compile "io.dropwizard.metrics:metrics-json"
+    compile "io.dropwizard.metrics:metrics-jvm"
+    compile "io.dropwizard.metrics:metrics-servlet"
+    compile "io.dropwizard.metrics:metrics-servlets"
+    compile "io.prometheus:simpleclient:0.6.0"
+    compile "io.prometheus:simpleclient_dropwizard:0.6.0"
+    compile "io.prometheus:simpleclient_servlet:0.6.0"
+    compile "net.logstash.logback:logstash-logback-encoder"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-hppc"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+    compile "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
+    compile "com.fasterxml.jackson.core:jackson-annotations"
+    compile "com.fasterxml.jackson.core:jackson-databind"
+    compile "com.fasterxml.jackson.module:jackson-module-afterburner"
+    compile "com.ryantenney.metrics:metrics-spring:3.1.3"
+    
+    // compile "org.hibernate:hibernate-infinispan"
+    compile group: 'org.infinispan', name: 'infinispan-hibernate-cache-v53', version: '9.4.12.Final'
+    
+    compile "org.infinispan:infinispan-spring-boot-starter:2.1.5.Final"
+    compile "org.infinispan:infinispan-core"
+    compile "org.infinispan:infinispan-jcache"
+    compile ("org.infinispan:infinispan-cloud") {
+        exclude module: 'undertow-core'
+    }
+    compile "javax.cache:cache-api"
+    compile "org.hibernate:hibernate-core"
+    compile "com.zaxxer:HikariCP"
+    compile "org.apache.commons:commons-lang3"
+    compile "commons-io:commons-io"
+    compile "javax.transaction:javax.transaction-api"
+    compile "org.hibernate:hibernate-entitymanager"
+    compile "org.hibernate:hibernate-envers"
+    compile "org.hibernate.validator:hibernate-validator"
+    compile "org.liquibase:liquibase-core"
+    compile "com.mattbertolini:liquibase-slf4j:1.2.1"
+
+    liquibaseRuntime "org.liquibase:liquibase-core:$liquibase_version"
+    liquibaseRuntime "org.liquibase.ext:liquibase-hibernate5:${liquibase_hibernate5_version}"
+    liquibaseRuntime sourceSets.main.compileClasspath
+    // force version (tp)
+    compile "org.springframework.boot:spring-boot-loader-tools:$spring_boot_version"
+    compile "org.springframework.boot:spring-boot-starter-mail:$spring_boot_version"
+    compile "org.springframework.boot:spring-boot-starter-logging:$spring_boot_version"
+    compile "org.springframework.boot:spring-boot-starter-actuator:$spring_boot_version"
+    compile "org.springframework.boot:spring-boot-starter-aop:$spring_boot_version"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:$spring_boot_version"
+    compile "org.springframework.boot:spring-boot-starter-security:$spring_boot_version"
+    compile("org.springframework.boot:spring-boot-starter-web:$spring_boot_version") {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    compile "org.springframework.boot:spring-boot-starter-undertow:$spring_boot_version"
+    compile "org.springframework.boot:spring-boot-starter-thymeleaf:$spring_boot_version"
+    compile "org.zalando:problem-spring-web:0.24.0-RC.0"
+    compile "org.springframework.cloud:spring-cloud-starter"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-ribbon"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-hystrix"
+    compile "org.springframework.retry:spring-retry"
+    compile "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
+    compile "org.springframework.cloud:spring-cloud-starter-config"
+    compile "org.springframework.cloud:spring-cloud-security"
+    compile "org.springframework.cloud:spring-cloud-starter-openfeign"
+    compile "org.springframework.boot:spring-boot-starter-cloud-connectors:$spring_boot_version"
+    compile "org.springframework.security:spring-security-config"
+    compile "org.springframework.security:spring-security-data"
+    compile "org.springframework.security:spring-security-web"
+
+    // compile "org.springframework.security.oauth:spring-security-oauth2:2.3.5.RELEASE"
+    compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:$spring_boot_version"
+    compile "org.springframework.security.oauth:spring-security-oauth2"
+    // compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure"
+    compile "org.springframework.security:spring-security-jwt"
+    compile("io.springfox:springfox-swagger2") {
+        exclude module: 'mapstruct'
+    }
+    compile "io.springfox:springfox-bean-validators"
+    compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct_version}"
+    annotationProcessor "org.hibernate:hibernate-jpamodelgen:$hibernate_version"
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$spring_boot_version") {
+        exclude group: 'com.vaadin.external.google', module: 'android-json'
+    }
+    testCompile "com.jayway.jsonpath:json-path"
+    testCompile "io.cucumber:cucumber-junit:$cucumber_version"
+    testCompile "io.cucumber:cucumber-spring:$cucumber_version"
+    testCompile("org.springframework.boot:spring-boot-starter-test:$spring_boot_version") {
+        exclude group: 'com.vaadin.external.google', module: 'android-json'
+    }
+    testCompile "org.springframework.security:spring-security-test"
+    testCompile "org.springframework.boot:spring-boot-test:$spring_boot_version"
+    testCompile "org.assertj:assertj-core"
+    testCompile "junit:junit"
+    testCompile "org.mockito:mockito-core"
+    testCompile "com.mattbertolini:liquibase-slf4j"
+    testCompile "org.hamcrest:hamcrest-library"
+    testCompile "com.h2database:h2"
+
+    // compile "com.oracle.jdbc:ojdbc8"
+    // liquibaseRuntime "com.oracle.jdbc:ojdbc8"
+
+    //jhipster-needle-gradle-dependency - JHipster will add additional dependencies here
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "$projectDir/src/main/java"
+            srcDir "$buildDir/generated/sources/xjc"
+        }
+    }
+}
+
+tasks.named("clean") { clean ->
+    doFirst {
+        delete(swaggerOutput)
+    }
+    dependsOn(":cleanResources")
+}
+
+def xjcGenerate = tasks.register("xjcGenerate", JavaExec.class) {
+    def inDir = "$projectDir/src/dsl/jaxb"
+    def outDir = "$buildDir/generated/sources/xjc"
+    doFirst {
+        mkdir outDir
+    }
+
+    // TODO tp: does not work...
+    inputs.files(fileTree(inDir))
+    outputs.dir(outDir)
+    outputs.files(fileTree(outDir))
+
+    main = "com.sun.tools.xjc.XJCFacade"
+    args "-xmlschema", "-verbose", inDir, "-d", outDir, "-p", "de.dand.vsit.bux"
+    classpath configurations.xjc
+}
+
+task cleanResources(type: Delete) {
+    delete 'build/resources'
+}
+
+wrapper {
+    gradleVersion = '5.1.1'
+}
+
+task stage(dependsOn: 'bootWar') {
+}
+
+tasks.withType(JavaCompile) {
+    doFirst {
+        options.compilerArgs.addAll([
+            "--release", javaVersion.toString(),
+            "-encoding", "UTF-8"
+        ])
+        if (javacLint) {
+            options.compilerArgs.addAll([
+                "-deprecation",
+                "-Xlint:all,-serial"
+            ])
+        }
+    }
+}
+
+build.dependsOn publishToMavenLocal
+bootRun.dependsOn build
+
+// bootWar.dependsOn war, publishToMavenLocal
+compileJava.dependsOn processResources // , xjcGenerate
+processResources.dependsOn cleanResources, bootBuildInfo
+bootBuildInfo.mustRunAfter cleanResources
