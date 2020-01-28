@@ -1,8 +1,8 @@
 // https://asciidoctor.org/docs/asciidoctor-revealjs/
 
 // Load asciidoctor.js and asciidoctor-reveal.js
-var asciidoctor = require('asciidoctor.js')();
-var asciidoctorRevealjs = require('asciidoctor-reveal.js');
+var asciidoctor = require('@asciidoctor/core')();
+var asciidoctorRevealjs = require('@asciidoctor/reveal.js');
 asciidoctorRevealjs.register()
 
 // Convert the document 'presentation.adoc' using the reveal.js converter
