@@ -1,0 +1,547 @@
+= Advanced Git with CLI
+:customcss: my-css.css
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: assets
+:revealjs_theme: solarized
+:revealjs_slideNumber: h.v
+:revealjs_fragments: true
+:revealjs_fragmentInURL: true
+:revealjs_history: true
+:highlightjs-theme: node_modules/highlight.js/styles/github.css
+:revealjs_plugin_math: enabled
+:revealjs_plugin_highlight: enabled
+// must be enabled manually (tp)
+:revealjs_plugin_markdown: disabled
+:revealjs_plugin_multiplex: enabled
+:revealjs_plugin_pdf: enabled
+:revealjs_plugins: reveal-plugins.js
+:revealjs_plugins_configuration: reveal-plugins-config.js
+:twitter-tag: Thomas Pasch
+:conference-tag: SiteOS Außenstelle
+:talk-tag: Advanced Git with CLI
+
+== Übersicht
+
+include::footer.ad[]
+
+* Git
+
+
+== Git Referenzen/Bücher
+
+* https://git-scm.com/book/en/v2
+
+== Git Slides
+
+* https://www.slideshare.net/naimlatifi/gitpresentation-140814102916phpapp01
+* https://en.wikipedia.org/wiki/Git
+
+* https://www.toptal.com/git/the-advanced-git-guide
+* https://www.atlassian.com/git/tutorials/advanced-overview
+
+== Git Cheat Sheets (and short tutorials)
+
+* https://marklodato.github.io/visual-git-guide/index-en.html
+* https://git-scm.com/docs/everyday
+* https://git.wiki.kernel.org/index.php/GitDocumentation
+
+* https://overapi.com/git
+* https://jan-krueger.net/git-cheat-sheet-extended-edition (svg)
+* https://rawgit.com/pastjean/git-cheat-sheet/master/git-cheat-sheet.svg (old)
+* https://www.git-tower.com/blog/git-cheat-sheet/
+* https://ndpsoftware.com/git-cheatsheet.html (interactive)
+
+== Git UIs (Übersichten)
+
+* https://git-scm.com/downloads/guis/
+* https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Graphical-Interfaces
+* https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools
+
+== Git UIs (Implementierungen)
+
+* https://gitextensions.github.io/
+* https://www.git-tower.com
+* https://www.sourcetreeapp.com/
+* https://www.gitkraken.com/
+* https://desktop.github.com/
+
+== Git Receiptes
+
+* https://www.git-tower.com/learn/git/webinar/undoing-things-with-git
+* https://makandracards.com/makandra/1717-git-change-author-of-a-commit
+* https://www.git-tower.com/learn/git/faq/change-author-name-email
+
+== Git Internals
+
+* https://git-scm.com/book/en/v2/Git-Internals-Transfer-Protocols
+* https://git-scm.com/docs/protocol-v2
+
+== Übersicht
+
+include::footer.ad[]
+
+* Warum Java 11?
+* Herausforderungen
+* Module System
+* Enterprise App unter Java 11
+
+== Warum Java 11?
+
+* Java 11 hat Oracle 'long-term support' +
+  (bis 07/2023)footnote:[AdoptOpenJDK hat andere Supportziele]
+* Garbage Collector
+** GC Interface
+** Parallel full GC for G1
+
+=== Warum Java 11? (2)
+
+* jshell
+* TLS 1.3
+* Unicode 10.0.0
+* HiDPI (Swing)
+
+=== Warum Java 11? (Tools)
+
+* `jlink`
+* `jimage`
+* `jmod`
+
+=== Java 11: APIs
+
+* Local variable type inference (`var` keyword)
+* New native unmodifiable collections APIs
+* New reactive streams APIs
+* Improved streams/predicate/optional APIs
+* Improved system process API
+
+=== Java 11: APIs (2)
+
+* Improved files API
+* Support for HTTP/2
+* Standard Java Async HTTP client
+* Multi-release JARs
+
+=== Java 11 Compiler
+
+* neue API
+* neue Optionen, u.a. linter
+* AOT (Graalvm), `jaotc`
+* `source`, `target` -> `release`
+
+=== Deprecated und nun entfernt
+
+* `{Runtime, System}.runFinalizersOnExit`
+* Einige Methoden von `SecurityManager`
+* `Thread.destroy`
+* `Thread.stop`
+
+=== Deprecated in Java 11
+
+* Nashorn JS Engine
+* Applet API
+* SAX -> SAX2
+* `finalize`
+* `pack200`
+
+== Herausforderungen
+
+* Nutze OpenJDK (statt Oracle VM)
+* Fehlende Module
+* Eingeschränkte Reflection
+* Neuer Byte Code
+* Java Module System
+* Build Tools
+* WAR, EAR etc.
+
+== OpenJDK (vs. Oracle JVM)
+
+* GPLv2+CPE
+* Kein Flag `-XX:+UnlockCommercialFeatures`
+* Fehlende Module:
+** `jdk.packager.services`
+** `jdk.snmp` SNMP Support
+
+=== OpenJDK: Fehlende Module
+
+* *JavaFX* `+javax.*+`
+* *Web Start* `java.jnlp`
+* *Flight Recorder* `jdk.jfr`
+*  *(wenige) JMX Teile* +
+  `+jdk.management.*+`
+
+== Nicht mehr in Java 11: Module
+
+* *JAX-WS*, *SAAJ* `java.xml.ws`
+* *JAXB* `java.xml.bind`
+* *JAF* `java.activation`
+* `java.xml.ws.annotation`
+* *CORBA* `java.corba`
+* *JTA* `java.transaction`
+* *JEE* `java.se.ee`
+
+=== Nicht mehr in Java 11: Tools
+
+* *Tools für JAX-WS* `jdk.xml.ws`
+* *Tools für JAXB* `jdk.xml.bind`
+
+== Reflection
+
+* `com.sun.Unsafe`
+* Eingeschränkte Reflection = Höhere Sicherheit
+* Inkompatibel mit vielen Libraries
+
+=== Illegal Access
+
+[source]
+----
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.xnio.nio.NioXnio$2
+(file:/home/tpasch/.m2/repository/org/jboss/xnio/xnio-nio/3.3.8.Final/
+xnio-nio-3.3.8.Final.jar)
+to constructor sun.nio.ch.EPollSelectorProvider()
+----
+
+=== Ausschalten
+
+* `--illegal-access=warn`
+
+== Neuer Byte Code
+
+=== Libraries: BCE
+
+* javassist *3.24.1-GA*
+* asm *7.0* (6.2)
+* byte-buddy *1.9.6*
+* aspectjweaver *1.9.2*
+* classmate *1.4.0*
+* mockito-core *2.20.0*
+
+=== Libraries: Spring
+
+* springframework *5.1.x*
+* spring security *5.1.x*
+* spring boot *2.1.x*
+* spring cloud *Greenwich*
+* snakeyaml *1.23*
+
+=== Libraries: Misc
+
+* javax.activation-api *1.3.0*
+* javax.transaction-api *1.3.0*
+* hibernate-jpa-2.1-api *1.0.2*
+* HikariCP *3.3.0* (optional?)
+
+=== Libraries: Java EE
+
+* `javax` / `jakarta` Problem
+* `javax.activation:activation` -> +
+  `jakarta.activation:jakarta.activation-api`
+* `javax.xml.bind:jaxb-api` -> +
+  `jakarta.xml.bind:jakarta.xml.bind-api`
+
+=== Tools
+
+* Jacoco -> Cobertura
+
+== Module System
+
+* Ziel: Modularisierung Java Plattform
+* Java Entwicklung?
+* Neue Semantic für JARs
+* Keine Versionierung
+* `--module-path` statt `--classpath`
+
+=== Was ist ein Module?
+
+* JAR
+* `--module-path`
+* `module-info.java`
+* Alle packages kommen nur 1x vor
+
+=== `module-info.java`
+
+DSL für Modul Abhängigkeiten
+
+* `open` für Deep Reflection
+* `requires` für Module Import
+* `requires transitive` für Abhängigkeiten
+* `exports` für Module Re-exports
+
+=== Beispiel
+
+.module-info.java
+[source,java]
+----
+open module io.github.jhipster.sample {
+    requires transitive org.apache.commons.lang3;
+    requires org.apache.logging.log4j;
+    requires slf4j.api;
+    requires jdk.unsupported;
+}
+----
+
+=== `module-info.java` (Services)
+
+* `provides <interface> with <class>`
+* `uses <interface>`
+* `ServiceLoader` zum runtime Dispatch
+
+=== Beispiel Uses
+
+.module-info.java
+[source,java]
+----
+module java.sql {
+   // Definiert Schnittstelle und exportiert sie
+   uses java.sql.Driver;
+   exports java.sql;
+}
+----
+
+=== Beispiel Provides
+
+.module-info.java
+[source,java]
+----
+module com.mysql.jdbc {
+   requires java.sql;
+
+   // Implementiert Schnittstelle?
+   provides java.sql.Driver with com.mysql.jdbc.Driver;
+}
+----
+
+== Sichtbarkeit
+
+* Compile Time
+* Shallow Reflection
+* Deep Reflection
+
+=== Module Info
+
+|===
+|**Zugriff...** 	|**Compile-Zeit** 	|**Reflection (Shallow)** 	|**Reflection (Deep)**
+|_exports pkg_ 	|+ 	|+ 	|-
+|_opens pkg_ 	    |- 	|+ 	|+
+|_exports pkg und
+opens pkg_ 	    |+ 	|+ 	|+
+|===
+
+=== Konsequenzen
+
+* `public` ist nur noch im Module sichtbar
+* Globale Sichtbarkeit: `public` *und* `exports`
+* Semantikänderung für JARs!
+
+== Split JAR
+
+* 1 Packetname darf nur in 1 Module/JARs sein
+* Sonst Fehler (compile/runtime)
+* Semantikänderung für JARs!
+
+== Änderungen am Module System
+
+|===
+|**Man kann ...**	|**Flag**
+|weitere Packages exportieren	|`--add-exports`
+|eine neue Read-Beziehung einführen 	|`--add-reads`
+|ein weiteres Modul dazuladen 	|`--add-modules` +
+|Module mit Klassen patchen 	|`--patch-module`
+|===
+
+=== Praxis
+
+* Viral
+* Nützlich für Tests (?)
+* Keine Lösung, wenn viele Module betroffen
+
+== Class- und Module Path
+
+* Modulekategorien
+
+=== _Unnamed Module_
+
+* Alle Inhalte des Classpaths
+* Zugriff auf sämtliche Module
+* Exportiert alles
+
+=== _Explicit Module_
+
+* `module-info.java`
+* *kein* Zugriff aufs _Unnamed Module_
+
+=== _Automatic Module_
+
+* JAR im Modulepath
+* *kein* `module-info.java`
+* Zugriff auf sämtliche Module
+* Zugriff aufs _Unnamed Module_
+* Exportiert alles
+
+=== _Open Module_
+
+* Wie _Explicit Module_
+* Exportiert alles für Deep Reflection
+
+=== _Named Module_
+
+* _Explicit Module_ oder
+* _Open Module_ oder
+* _Automatic Module_
+
+== Maven
+
+* maven-compiler-plugin *3.8.0*
+* `mvn dependency:tree` zur Analyse
+* compiler: `source`, `target` -> `release`
+
+=== Probleme
+
+* Dependency Resolution
+* Austausch von Dependencies
+* JAXB
+
+== Gradle
+
+* Build files in Kotlin oder Groovy
+* Agent (schneller Builds)
+* _Dependency Resolution konfigurierbar_
+* `gradle dependencies` zur Analyse
+* Kompatibel zu Maven Repositories
+* Aktive Weiterentwicklung
+
+=== Dependency Resolution
+
+.build.gradle
+[source,groovy]
+----
+configurations.all {
+    resolutionStrategy {
+        preferProjectModules()
+
+        setForcedModules(
+            "org.javassist:javassist:3.24.1-GA"
+        )
+
+        eachDependency {
+            if (requested.group.equals("javax.xml.bind") && requested.name.equals("jaxb-api")) {
+                useTarget([
+                    "group"  : "jakarta.xml.bind",
+                    "name"   : "jakarta.xml.bind-api",
+                    "version": jaxbApi
+                ])
+            }
+        }
+    }
+}
+----
+
+== Java 11 und Java 8
+
+* Fehlermeldungen Compiler
+
+=== Module Name für Java 8
+
+[source]
+----
+[WARNING] Can't extract module name from
+spring-cloud-cloudfoundry-connector-2.0.4.RELEASE.jar:
+[WARNING] Can't extract module name from
+jboss-transaction-api_1.2_spec-1.0.1.Final.jar:
+jboss.transaction.api.1.2.spec: Invalid module name: '1' is not a Java identifier
+----
+
+=== Automodules (1)
+
+[source]
+----
+[INFO] Required filename-based automodules detected.
+Please don't publish this project to a
+public artifact repository!
+----
+
+=== Automodules (2)
+
+* Lösung: `META-INF/MANIFEST.MF`
+* Attribute +
+  `Automatic-Module-Name: de.siteos.whatever`
+* In **alle** eigenen JARs einfügen!
+
+=== Unvisible
+
+Fehlendes `requires`
+
+[source]
+----
+[ERROR] .../BankAccount.java:[6,21] package
+org.hibernate.annotations is not visible
+----
+
+=== Not Read
+
+Fehlendes `requires`
+
+[source]
+----
+[ERROR] (package org.zalando.problem
+is declared in the unnamed module,
+but module org.zalando.problem does not read it)
+----
+
+=== Reads from both
+
+Split JAR problem
+
+[source]
+----
+[ERROR] the unnamed module reads package
+org.zalando.problem
+from both problem and jackson.datatype.problem
+[ERROR] module spring.tx reads package
+org.zalando.problem
+from both jackson.datatype.problem and problem
+----
+
+== Fazit
+
+* Semantikänderung JARs
+* Keine Versionierung
+* Keine Scopes
+* Keine Hierachie
+
+== Referenzen Migration
+
+* Migration Spring Boot App +
+  https://medium.com/criciumadev/its-time-migrating-to-java-11-5eb3868354f9
+* https://blog.codefx.org/java/java-11-migration-guide/
+* https://medium.com/criciumadev/java-10-migration-5d853f5b5f7e
+
+=== Referenzen Java 11
+
+* Oracle Java Magazine: What's new in Java 11? +
+  http://www.javamagazine.mozaicreader.com/NovemberDecember2018/Default/39/0/4097899
+* Flags/Options `javac` +
+  https://docs.oracle.com/en/java/javase/11/tools/javac.html
+
+=== Referenzen Java Module System
+
+* https://www.informatik-aktuell.de/entwicklung/programmiersprachen/java-9-das-neue-modulsystem-jigsaw-tutorial.html
+
+=== Referenzen Support und Lizenz
+
+* Übersicht Anbieter +
+  https://docs.google.com/document/d/1nFGazvrCvHMZJgFstlbzoHjpAVwv5DEdnaBr_5pKuHo/preview#
+* AdoptOpenJDK +
+  https://adoptopenjdk.net/
+
+=== Referenzen JEE 8 und Eclipse
+
+* https://www.heise.de/developer/artikel/Jakarta-EE-Der-Anfang-vom-Ende-oder-die-Chance-fuer-einen-Neuanfang-4413537.html
+* https://www.heise.de/developer/meldung/Kommentar-Java-EE-ist-am-Ende-4413601.html
+* https://www.heise.de/developer/meldung/Kommentar-Eine-Chance-fuer-Jakarta-EE-4413990.html
+
+=== Referenzen Asciidoctor
+
+* https://asciidoctor.org/docs/asciidoc-syntax-quick-reference/
+* https://asciidoctor.org/docs/user-manual/
