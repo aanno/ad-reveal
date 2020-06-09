@@ -1,0 +1,24 @@
+## Git UI (Linux, free)
+
+* https://github.com/FredrikNoren/ungit (including https://xkcd.com/1597/)
+  + submodule support
+  + https://github.com/FredrikNoren/ungit/blob/master/MERGETOOL.md
+* https://github.com/gitahead/gitahead
+* https://git-cola.readthedocs.io/en/latest/
+  + https://github.com/git-cola/git-cola
+* https://www.collab.net/products/giteye
+
+* https://relevant-xkcd.github.io/?q=git
+
+## Git CLI
+
+* https://docs.gitlab.com/ee/gitlab-basics/start-using-git.html
+* https://medium.com/@porteneuve/30-git-cli-options-you-should-know-about-15423e8771df
+* https://hackernoon.com/lesser-known-git-commands-151a1918a60
+* https://stackoverflow.com/questions/5361019/viewing-full-version-tree-in-git
+
+
+## Git beginner
+
+* https://blog.prototypr.io/git-for-beginners-12-commands-you-need-to-know-e084cce9cc94?gi=36828574a81c
+* https://github.com/RehanSaeed/Git-Cheat-Sheet
