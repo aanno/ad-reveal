@@ -22,3 +22,31 @@
 
 * https://blog.prototypr.io/git-for-beginners-12-commands-you-need-to-know-e084cce9cc94?gi=36828574a81c
 * https://github.com/RehanSaeed/Git-Cheat-Sheet
+
+## Git misc
+
+* https://nvie.com/posts/a-successful-git-branching-model/
+  If your team is doing continuous delivery of software, I would suggest to adopt a much simpler workflow (like GitHub flow) instead of trying to shoehorn git-flow into your team.
+
+## Git Visualization
+
+* https://onlywei.github.io/explain-git-with-d3/#commit
+* https://gitgraphjs.com
+* https://stackoverflow.com/questions/50930900/git-graph-parent-child-tabular-format/51129146
+* https://tylercipriani.com/blog/2016/03/21/Visualizing-Git-Merkle-DAG-with-D3.js/
+* https://jezenthomas.com/visualising-code-growth-with-git-and-d3/
+* https://www.heise.de/ct/artikel/Linux-5-4-freigegeben-exFAT-Support-und-Einschraenkungen-fuer-Root-4541639.html?seite=7
+
+## Git Workflows
+
+* https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows
+* https://www.atlassian.com/git/tutorials/comparing-workflows
+
+## Git plugins
+
+* https://github.com/git-time-metric/gtm
+
+## Asciidoctor/reveal
+
+* https://discuss.asciidoctor.org/how-to-include-a-snippet-of-html-td5293.html
+* https://dzone.com/articles/presentation-as-code-why-i-abandoned-powerpoint

@@ -21,12 +21,90 @@
 :conference-tag: SiteOS Außenstelle
 :talk-tag: Advanced Git with CLI
 
-== Übersicht
+== Overview 1
 
 include::footer.ad[]
 
-* Git
+* Basic git Concepts
+* Basic git config
+* UI is not evil
+* git-on-browser is _not_ evil
+* CLI: no panic!
 
+== Overview 2
+
+* Advanced git Concepts
+* Things hard without CLI
+* Desaster recovery
+
+== Overview 3
+
+* git submodule
+* git lfs
+* git flow
+* git gtm
+* Code Review with gitlab
+
+== Basic git Concepts
+
+=== Working tree
+
+=== Index
+
+=== Local repo
+
+=== Remote repo
+
+=== Fast forward
+
+=== Workflows
+
+=== Detached head
+
+=== Refs/Tree-ish
+
+=== .git directory layout
+
+== Basic git config
+
+=== 2 basic transports
+
+== UI is _not_ evil
+
+=== UIs (Linux)
+
+=== UI graph with gitk
+
+=== Things easier with UI
+
+== CLI: no panic!
+
+=== Everyday git
+
+== Advanced git Concepts
+
+=== Conflicts
+
+=== Merge vs Rebase
+
+=== Linearized history with rebase
+
+== Things hard without CLI
+
+* git bisect
+* git rerere
+
+== Desaster recovery
+
+== git submodule
+
+== git lfs
+
+== git flow
+
+== gtm
+
+== Code review with gitlab
 
 == Git Referenzen/Bücher
 
@@ -71,6 +149,7 @@ include::footer.ad[]
 * https://www.git-tower.com/learn/git/webinar/undoing-things-with-git
 * https://makandracards.com/makandra/1717-git-change-author-of-a-commit
 * https://www.git-tower.com/learn/git/faq/change-author-name-email
+* https://toucantoco.com/en/tech-blog/tech/git-aliases
 
 == Git Internals
 
