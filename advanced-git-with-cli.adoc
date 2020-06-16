@@ -47,19 +47,76 @@ include::footer.ad[]
 
 == Basic git Concepts
 
-=== Working tree
+* working tree
+* index
+* local repo
+* remote repo
+
+=== Working tree (wt)
+
+* files checked out
+* with all the local changes
+* a part of the changes _may_ be part of the index
 
 === Index
 
+* staged part of the changes
+* changes are staged with +
+  `git add \-- <file>`
+* will be committed (next) with +
+  `git commit -m "<message>"`
+
+=== Tip: Working without index
+
+* you can work without using index
+  - no `git add` needed
+  - commit with `git commit *-a* -m`
+* I mostly do
+
 === Local repo
+
+* commits get into the _local_ repo
+* (local) HEAD
 
 === Remote repo
 
-=== Fast forward
+* remote -> pull -> local
+* local -> push -> remote
+* what happens depends on _your_ configuration
+* _more the one remote repo is possible_
+
+=== Fast forward (ff)
+
+* ff is push/pull _non-conflicting_ changes
+* _non-conflicting_ means no merge needed
+* ff means linear history
 
 === Workflows
 
+* centralized workflow
+* feature branch workflow
+* fork and pr workflow (github style)
+* ...
+
+=== Branch (1)
+
+* a branch is simply a smart label
+* a label is a symbolic name for a commit
+* smart means magic when update happens
+* a dump label is a tag
+
+=== Branch (2)
+
+* normally you are on a branch
+* if you commit sth, the label is updated
+* if you pull (and ff), the label is updated
+
 === Detached head
+
+* if you a not on a branch, you are detached
+* if you are detached, you can't commit
+* => if you want to commit, create a branch before +
+  `git checkout -b <branchname>`
 
 === Refs/Tree-ish
 
@@ -67,17 +124,47 @@ include::footer.ad[]
 
 == Basic git config
 
+```bash
+$ cat ~/.gitconfig
+[user]
+        email = 33512482+aanno2@users.noreply.github.com
+        name = aanno2
+[core]
+        preloadindex = true
+        fscache = true
+[gc]
+        auto = 256
+[credential]
+        helper = manager
+[filter "lfs"]
+        required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+```
+
 === 2 basic transports
 
 == UI is _not_ evil
 
-=== UIs (Linux)
+=== Git UI (Linux, free)
+
+* https://github.com/FredrikNoren/ungit
+  + submodule support
+  + https://github.com/FredrikNoren/ungit/blob/master/MERGETOOL.md
+* https://github.com/gitahead/gitahead
+* https://git-cola.readthedocs.io/en/latest/
+  + https://github.com/git-cola/git-cola
+* https://www.collab.net/products/giteye
+  + only a stripped-down eclipse
 
 === UI graph with gitk
 
 === Things easier with UI
 
 == CLI: no panic!
+
+* ` git log --all --decorate --oneline --graph --color`
 
 === Everyday git
 
