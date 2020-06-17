@@ -31,13 +31,13 @@ include::footer.ad[]
 * git-on-browser is _not_ evil
 * CLI: no panic!
 
-== Overview 2
+=== Overview 2
 
 * Advanced git Concepts
 * Things hard without CLI
-* Desaster recovery
+* Disaster recovery
 
-== Overview 3
+=== Overview 3
 
 * git submodule
 * git lfs
@@ -98,6 +98,12 @@ include::footer.ad[]
 * fork and pr workflow (github style)
 * ...
 
+=== Commit messages
+
+[#img-git-commit-messages]
+.git usability
+image::git/xkcd-git-commit-messages.png[XKCD git commit messages]
+
 === Branch (1)
 
 * a branch is simply a smart label
@@ -145,43 +151,114 @@ $ cat ~/.gitconfig
 
 === 2 basic transports
 
+* https based (basic auth for write)
+  - `https://aanno@github.com/aanno/ad-reveal.git`
+* ssh based (cert based)
+  - `git@github.com:aanno/ad-reveal.git`
+* *you can't login to a `git server`*
+  - ssh protocol only to transfer data
+
 == UI is _not_ evil
+
+[#img-git-usability]
+image::git/xkcd-git-no-ui.png[XKCD git usability]
+
+== UI is _not_ evil
+
+* UI is a valid tool to make life easier
+* UI should not 'abstract' away git features
+* I use UI for 'reading' history
 
 === Git UI (Linux, free)
 
 * https://github.com/FredrikNoren/ungit
-  + submodule support
-  + https://github.com/FredrikNoren/ungit/blob/master/MERGETOOL.md
+  - submodule support
+  - https://github.com/FredrikNoren/ungit/blob/master/MERGETOOL.md
 * https://github.com/gitahead/gitahead
 * https://git-cola.readthedocs.io/en/latest/
-  + https://github.com/git-cola/git-cola
+  - https://github.com/git-cola/git-cola
 * https://www.collab.net/products/giteye
-  + only a stripped-down eclipse
+  - only a stripped-down eclipse
 
 === UI graph with gitk
 
+[#img-gitk-1]
+image::git/gitk-1.jpg[gitk tool (part of git)]
+
 === Things easier with UI
+
+* follow history and see commits
+* get a quick overview about history
+* quick commit diff in history
 
 == CLI: no panic!
 
-* ` git log --all --decorate --oneline --graph --color`
+* `git help <command>` is your friend
+* if you don't `push` the mess is (only) yours
+* disaster recovery is possible
+* `git log --all --decorate --oneline --graph --color`
 
-=== Everyday git
+== Everyday git (1)
+
+. `git-init` to create a new repository
+. `git-log` to see what happened
+. `git-switch` and `git-branch` to switch branches
+. `git-add` to manage the index file
+. `git-diff` and `git-status` to see what you are in the middle of doing
+
+=== Everyday git (2)
+
+[start=6]
+. `git-commit` to advance the current branch
+. `git-restore` to undo changes
+. `git-merge` to merge between local branches
+. `git-rebase` to maintain topic branches
+. `git-tag` to mark a known point
+
+=== Everyday git (editor's choice)
+
+[start=11]
+. `git-clone` to clone a remote repo
+. `git-stash` to temporary store changes
+. `git-checkout -b` to create a new (local) branch
+. `git-push` to update remote head
+. `git-pull` to update local head
 
 == Advanced git Concepts
 
+* conflicts
+* merge vs rebase
+* linearized history with rebase
+
 === Conflicts
+
+* conflicts are always _local_
+* most conflicts are easy
+* idea has _great_ conflict support
 
 === Merge vs Rebase
 
 === Linearized history with rebase
 
-== Things hard without CLI
+=== Things hard without CLI
 
-* git bisect
-* git rerere
+* `git-bisect`
+* `git-rerere`
 
-== Desaster recovery
+== Disaster recovery
+
+* Don't panic
+* Don't `push`
+* `gitk`
+* `git-log`
+* `git-reflog`
+
+== More git
+
+* `git-submodule`
+* `git-lfs`
+* `git-flow`
+* `gtm`
 
 == git submodule
 
@@ -191,13 +268,18 @@ $ cat ~/.gitconfig
 
 == gtm
 
+== Working install
+
+[#img-working-install]
+image::git/xkcd-working-install.png[XKCD working install]
+
 == Code review with gitlab
 
 == Git Referenzen/Bücher
 
 * https://git-scm.com/book/en/v2
 
-== Git Slides
+=== Git Slides
 
 * https://www.slideshare.net/naimlatifi/gitpresentation-140814102916phpapp01
 * https://en.wikipedia.org/wiki/Git
@@ -205,7 +287,7 @@ $ cat ~/.gitconfig
 * https://www.toptal.com/git/the-advanced-git-guide
 * https://www.atlassian.com/git/tutorials/advanced-overview
 
-== Git Cheat Sheets (and short tutorials)
+=== Git Cheat Sheets (and short tutorials)
 
 * https://marklodato.github.io/visual-git-guide/index-en.html
 * https://git-scm.com/docs/everyday
@@ -217,13 +299,13 @@ $ cat ~/.gitconfig
 * https://www.git-tower.com/blog/git-cheat-sheet/
 * https://ndpsoftware.com/git-cheatsheet.html (interactive)
 
-== Git UIs (Übersichten)
+=== Git UIs (Übersichten)
 
 * https://git-scm.com/downloads/guis/
 * https://git-scm.com/book/en/v2/Appendix-A%3A-Git-in-Other-Environments-Graphical-Interfaces
 * https://git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools
 
-== Git UIs (Implementierungen)
+=== Git UIs (Implementierungen)
 
 * https://gitextensions.github.io/
 * https://www.git-tower.com
@@ -231,14 +313,14 @@ $ cat ~/.gitconfig
 * https://www.gitkraken.com/
 * https://desktop.github.com/
 
-== Git Receiptes
+=== Git Receipts
 
 * https://www.git-tower.com/learn/git/webinar/undoing-things-with-git
 * https://makandracards.com/makandra/1717-git-change-author-of-a-commit
 * https://www.git-tower.com/learn/git/faq/change-author-name-email
 * https://toucantoco.com/en/tech-blog/tech/git-aliases
 
-== Git Internals
+=== Git Internals
 
 * https://git-scm.com/book/en/v2/Git-Internals-Transfer-Protocols
 * https://git-scm.com/docs/protocol-v2
