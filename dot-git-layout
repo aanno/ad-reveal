@@ -1,0 +1,58 @@
+.git
+├── branches
+├── COMMIT_EDITMSG
+├── config
+├── description
+├── FETCH_HEAD
+├── gitk.cache
+├── HEAD
+├── hooks
+│   ├── applypatch-msg.sample
+│   ├── commit-msg.sample
+│   ├── ...
+├── index
+├── info
+│   └── exclude
+├── lfs
+│   ├── cache
+│   │   └── locks
+│   │       └── refs
+│   │           └── heads
+│   │               ├── feature
+│   │               │   └── v3.1.0
+│   │               │       └── verifiable
+│   │               └── ...
+│   ├── objects
+│   │   ├── ...
+│   └── tmp
+├── logs
+│   ├── HEAD
+│   └── refs
+│       ├── heads
+│       │   ├── feature
+│       │   │   └── v3.1.0
+│       │   └── master
+│       └── remotes
+│           └── origin
+│               ├── feature
+│               │   └── v3.1.0
+│               └── master
+├── modules
+│   └── <submodule> ...
+├── objects
+│   ├── ...
+│   ├── info
+│   └── pack
+├── ORIG_HEAD
+└── refs
+    ├── heads
+    │   ├── feature
+    │   │   └── v3.1.0
+    │   └── master
+    ├── remotes
+    │   └── origin
+    │       ├── feature
+    │       │   └── v3.1.0
+    │       └── master
+    └── tags
+
