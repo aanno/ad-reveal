@@ -20,7 +20,7 @@
 :twitter-tag: @jensschauder
 :conference-tag: @JUGNBG
 :talk-tag: #sd-jdbc
-:stem: asciimath
+// :stem: asciimath
 
 == Slide One
 
@@ -51,6 +51,25 @@ Water (stem:[H_2O]) is a critical component.
 
 [pass]
 This results in \(x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\)
+
+== Code highlight
+
+[source#hello,ruby,linenums]   
+---- 
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+----
+
+Some text.
+
+[source,xml] 
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+This is normal content.
 
 == Slide markdown
 
