@@ -29,6 +29,15 @@ The resulting `*.html` file only renders in browser _if served by a server_. The
 
 and direct your browser to http://localhost:4000
 
+### FAQs
+
+#### MathJax3
+
+* https://github.com/hakimel/reveal.js/issues/2559
+* https://github.com/burgerga/reveal.js-math
+
+But I could not get this to work...
+
 ### References
 
 * https://asciidoctor.org/docs/asciidoctor-revealjs/
