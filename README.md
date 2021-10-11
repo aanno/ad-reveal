@@ -10,10 +10,12 @@ Some feature supported by this template/example:
 ## Get started
 
 ```bash
-node ad-reveal.js
+node ad-reveal.js <presentation.ad>
 ```
 
 ### References
 
 * https://asciidoctor.org/docs/asciidoctor-revealjs/
 * https://github.com/asciidoctor/asciidoctor-reveal.js/
+* https://docs.asciidoctor.org/reveal.js-converter/latest/
+* https://docs.asciidoctor.org/reveal.js-converter/latest/setup/node-js-setup/
