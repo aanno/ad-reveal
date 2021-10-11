@@ -38,6 +38,26 @@ and direct your browser to http://localhost:4000
 
 But I could not get this to work...
 
+#### STEM
+
+If stem is included, there will be the following code included into the Html:
+
+```html
+<script type="text/x-mathjax-config">MathJax.Hub.Config({
+tex2jax: {
+  inlineMath: [["\\(", "\\)"]],
+  displayMath: [["\\[", "\\]"]],
+  ignoreClass: "nostem|nolatexmath"
+},
+asciimath2jax: {
+  delimiters: [["\\$", "\\$"]],
+  ignoreClass: "nostem|noasciimath"
+},
+TeX: { equationNumbers: { autoNumber: "none" } }
+});</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+```
+
 ### References
 
 * https://asciidoctor.org/docs/asciidoctor-revealjs/
