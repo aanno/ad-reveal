@@ -47,6 +47,11 @@ sqrt(4) = 2
 ++++
 Water (stem:[H_2O]) is a critical component.
 
+== Slide math (from mathjax)
+
+[pass]
+This results in \(x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\)
+
 == Slide markdown
 
 // https://github.com/hakimel/reveal.js/
