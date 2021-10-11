@@ -44,3 +44,5 @@ But I could not get this to work...
 * https://github.com/asciidoctor/asciidoctor-reveal.js/
 * https://docs.asciidoctor.org/reveal.js-converter/latest/
 * https://docs.asciidoctor.org/reveal.js-converter/latest/setup/node-js-setup/
+* https://revealjs.com/math/ reveal.js math support documentation
+* https://github.com/Ardemius/asciidoctor-presentation (old) Some tips and tricks using asciidoctor in conjuction with docker, DZSlides or deck.js.
