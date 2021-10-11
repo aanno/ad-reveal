@@ -9,9 +9,25 @@ Some feature supported by this template/example:
 
 ## Get started
 
+Initial setup:
+
 ```bash
-node ad-reveal.js <presentation.ad>
+npm install
 ```
+
+For converting a presentation:
+
+```bash
+node ad-reveal.js <presentation.adoc>
+```
+
+The resulting `*.html` file only renders in browser _if served by a server_. Therefore:
+
+```bash
+./node_modules/.bin/light-server -s . -p 4000
+```
+
+and direct your browser to http://localhost:4000
 
 ### References
 
