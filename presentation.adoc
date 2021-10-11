@@ -20,6 +20,7 @@
 :twitter-tag: @jensschauder
 :conference-tag: @JUGNBG
 :talk-tag: #sd-jdbc
+:stem: asciimath
 
 == Slide One
 
@@ -29,13 +30,22 @@ include::footer.ad[]
 * Bar
 * World
 
-== Slide math
+== Slide math (from reveal)
 
 \[\begin{aligned}
 					\dot{x} &amp; = \sigma(y-x) \\
 					\dot{y} &amp; = \rho x - y - xz \\
 					\dot{z} &amp; = -\beta z + xy
 \end{aligned} \]
+
+== Diabolical Opus (from ad STEM)
+
+stem:[sqrt(4) = 2]
+[asciimath]
+++++
+sqrt(4) = 2
+++++
+Water (stem:[H_2O]) is a critical component.
 
 == Slide markdown
 
@@ -65,7 +75,9 @@ Is very yellow
 
 image::cover.jpg[canvas,size=contain]
 
-# * Grand Announcement (and no title)
+
+## * Grand Announcement
+ (and no title)
 
 [%notitle]
 == The Great Goat
@@ -142,4 +154,5 @@ This is a vertical subslide
 * Some
 * Information
 
-
+
+
