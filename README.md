@@ -31,6 +31,18 @@ and direct your browser to http://localhost:4000
 
 ### FAQs
 
+#### Configuration
+
+* https://docs.asciidoctor.org/asciidoctor.js/latest/processor/convert-options/ (asciidoctor.js)
+* https://docs.asciidoctor.org/reveal.js-converter/latest/converter/revealjs-options/ (asciidoctor-reveal.js)
+* https://revealjs.com/config/ (reveal.js)
+
+#### Plugin/extensions
+
+* https://docs.asciidoctor.org/asciidoctor.js/latest/extend/ (asciidoctor.js)
+* https://docs.asciidoctor.org/reveal.js-converter/latest/converter/revealjs-plugins/ (asciidoctor-reveal.js)
+* https://revealjs.com/plugins/ (reveal.js)
+
 #### MathJax3
 
 Problems related to reveal:
