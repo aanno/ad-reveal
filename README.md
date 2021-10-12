@@ -74,6 +74,12 @@ TeX: { equationNumbers: { autoNumber: "none" } }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
 ```
 
+#### Use a custom version of `asciidoctor.js`
+
+* https://github.com/asciidoctor/asciidoctor.js/blob/master/CONTRIBUTING-CODE.adoc
+* https://medium.com/@AidThompsin/how-to-npm-link-to-a-local-version-of-your-dependency-84e82126667a (npm)
+* https://www.viget.com/articles/how-to-use-local-unpublished-node-packages-as-project-dependencies/ (yarn)
+
 ### References
 
 * https://asciidoctor.org/docs/asciidoctor-revealjs/
