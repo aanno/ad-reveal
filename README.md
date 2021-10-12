@@ -33,10 +33,26 @@ and direct your browser to http://localhost:4000
 
 #### MathJax3
 
+Problems related to reveal:
+
 * https://github.com/hakimel/reveal.js/issues/2559
 * https://github.com/burgerga/reveal.js-math
 
+Problems related to asciidoctor:
+
+* https://github.com/asciidoctor/asciidoctor/issues/3449
+* https://github.com/tani/asciidoctor-mathjax3
+
 But I could not get this to work...
+
+#### Reveal Version
+
+You can find the reveal version used by opening
+
+https://github.com/asciidoctor/asciidoctor-reveal.js/blob/v4.1.0/package.json
+
+in your browser. For example, for `@asciidoctor/reveal` version 4.1.0, `reveal.js` version 3.9.2 is
+used. To use `reveal.js` version 4, you have to wait for `@asciidoctor/reveal` version 5.
 
 #### STEM
 

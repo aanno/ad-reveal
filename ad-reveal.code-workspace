@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"extensions": {
+		"recommendations": [ "flobilosaurus.vscode-asciidoc-slides" ],
+		"unwantedRecommendations": []
+	},
+	"settings": {}
+}
