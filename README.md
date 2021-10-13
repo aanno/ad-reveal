@@ -89,6 +89,7 @@ TeX: { equationNumbers: { autoNumber: "none" } }
 #### Use a custom version of `asciidoctor.js`
 
 * https://github.com/asciidoctor/asciidoctor.js/blob/master/CONTRIBUTING-CODE.adoc
+* https://docs.asciidoctor.org/reveal.js-converter/latest/project/hacking/
 * https://medium.com/@AidThompsin/how-to-npm-link-to-a-local-version-of-your-dependency-84e82126667a (npm)
 * https://www.viget.com/articles/how-to-use-local-unpublished-node-packages-as-project-dependencies/ (yarn)
 

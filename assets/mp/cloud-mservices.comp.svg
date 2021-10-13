@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="360px" preserveAspectRatio="none" style="width:626px;height:360px;background:#FFFFFF;" version="1.1" viewBox="0 0 626 360" width="626px" zoomAndPan="magnify"><defs><filter height="300%" id="f1lqvhf42d8nw3" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><!--MD5=[6a3eff1101b7c50212c4eccccf74bbaf]
+cluster cn--><rect fill="#FFFFFF" filter="url(#f1lqvhf42d8nw3)" height="296.5" style="stroke:#000000;stroke-width:1.5;" width="389" x="7" y="49.72"/><rect fill="#FFFFFF" height="10" style="stroke:#000000;stroke-width:1.5;" width="15" x="376" y="54.72"/><rect fill="#FFFFFF" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="374" y="56.72"/><rect fill="#FFFFFF" height="2" style="stroke:#000000;stroke-width:1.5;" width="4" x="374" y="60.72"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="97" x="153" y="75.7151">cloud-native</text><!--MD5=[a36a1f241da5a3aeefb94c8e9ea26d76]
+cluster <<cluster>>\nOracle--><path d="M433,211.72 C433,201.72 520,201.72 520,201.72 C520,201.72 607,201.72 607,211.72 L607,319.72 C607,329.72 520,329.72 520,329.72 C520,329.72 433,329.72 433,319.72 L433,211.72 " fill="#FFFFFF" filter="url(#f1lqvhf42d8nw3)" style="stroke:#000000;stroke-width:1.5;"/><path d="M433,211.72 C433,221.72 520,221.72 520,221.72 C520,221.72 607,221.72 607,211.72 " fill="none" style="stroke:#000000;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="103" x="468.5" y="236.7151">&lt;&lt;cluster&gt;&gt;</text><text fill="#000000" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="51" x="494.5" y="253.012">Oracle</text><!--MD5=[c5d11c0b53c10b1d2c1bf834d35d74f9]
+entity ms--><rect fill="#ADD8E6" filter="url(#f1lqvhf42d8nw3)" height="46.2969" style="stroke:#A80036;stroke-width:1.5;" width="70" x="197" y="92.72"/><rect fill="#ADD8E6" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="247" y="97.72"/><rect fill="#ADD8E6" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="245" y="99.72"/><rect fill="#ADD8E6" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="245" y="103.72"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="212" y="125.7151">ms1</text><!--MD5=[22c30b190618f40160d9be74abdeee9c]
+entity ms2--><rect fill="#ADD8E6" filter="url(#f1lqvhf42d8nw3)" height="46.2969" style="stroke:#A80036;stroke-width:1.5;" width="70" x="302" y="92.72"/><rect fill="#ADD8E6" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="352" y="97.72"/><rect fill="#ADD8E6" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="350" y="99.72"/><rect fill="#ADD8E6" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="350" y="103.72"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="30" x="317" y="125.7151">ms2</text><!--MD5=[0d15b2eb428f0c0027bf5ef6513f3386]
+entity solr--><rect fill="#FEFECE" filter="url(#f1lqvhf42d8nw3)" height="62.5938" style="stroke:#A80036;stroke-width:1.5;" width="105" x="39.5" y="259.22"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="124.5" y="264.22"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="122.5" y="266.22"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="122.5" y="270.22"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="54.5" y="292.2151">«cluster»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="26" x="54.5" y="308.512">Solr</text><!--MD5=[dab304f5ddff789061afb7df96f8505e]
+entity rabbit--><rect fill="#FEFECE" filter="url(#f1lqvhf42d8nw3)" height="62.5938" style="stroke:#A80036;stroke-width:1.5;" width="107" x="264.5" y="259.22"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="351.5" y="264.22"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="349.5" y="266.22"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="349.5" y="270.22"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="65" x="279.5" y="292.2151">«cluster»</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="67" x="279.5" y="308.512">RabbitMQ</text><!--MD5=[0686720d71d32ea68f81164171d509ce]
+entity store--><rect fill="#FEFECE" filter="url(#f1lqvhf42d8nw3)" height="46.2969" style="stroke:#A80036;stroke-width:1.5;" width="141" x="449.5" y="267.72"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="570.5" y="272.72"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="568.5" y="274.72"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="568.5" y="278.72"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="101" x="464.5" y="300.7151">common store</text><!--MD5=[5771220ad7326638e5779c769b83e9b3]
+entity QueueEx1--><path d="M425,102.72 L507,102.72 C512,102.72 512,115.8684 512,115.8684 C512,115.8684 512,129.0169 507,129.0169 L425,129.0169 C420,129.0169 420,115.8684 420,115.8684 C420,115.8684 420,102.72 425,102.72 " fill="#FEFECE" filter="url(#f1lqvhf42d8nw3)" style="stroke:#A80036;stroke-width:1.5;"/><path d="M507,102.72 C502,102.72 502,115.8684 502,115.8684 C502,129.0169 507,129.0169 507,129.0169 " fill="none" style="stroke:#A80036;stroke-width:1.5;"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="72" x="425" y="120.7151">QueueEx1</text><!--MD5=[b71b57f17476741658cf64e8b79a0016]
+entity Ex1--><rect fill="#FEFECE" filter="url(#f1lqvhf42d8nw3)" height="46.2969" style="stroke:#A80036;stroke-width:1.5;" width="65" x="547.5" y="92.72"/><rect fill="#FEFECE" height="10" style="stroke:#A80036;stroke-width:1.5;" width="15" x="592.5" y="97.72"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="590.5" y="99.72"/><rect fill="#FEFECE" height="2" style="stroke:#A80036;stroke-width:1.5;" width="4" x="590.5" y="103.72"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="25" x="562.5" y="125.7151">Ex1</text><!--MD5=[910b842f6dc810f3abd900006d30854f]
+link ms to solr--><path d="M213.98,138.98 C190.21,168.36 148.11,220.38 120.13,254.96 " fill="none" id="ms-to-solr" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="116.79,259.09,125.5698,254.6273,119.943,255.2094,119.3609,249.5826,116.79,259.09" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="36" x="187" y="181.7869">query</text><!--MD5=[6cf5967eeb7db0cb0820aec19eeae701]
+link ms to ms2--><path d="M267.27,115.72 C277.09,115.72 286.91,115.72 296.73,115.72 " fill="none" id="ms-to-ms2" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="301.86,115.72,292.86,111.72,296.86,115.72,292.86,119.72,301.86,115.72" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[4e61fd5e34d3a83985ca99782cdb6c7b]
+reverse link solr to rabbit--><path d="M149.84,290.72 C185.13,290.72 229.94,290.72 264.43,290.72 " fill="none" id="solr-backto-rabbit" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="144.7,290.72,153.7,294.72,149.7,290.72,153.7,286.72,144.7,290.72" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="83" x="163" y="283.7869">update index</text><!--MD5=[3642a79cd0b24fe671447dbcfbe3b94b]
+link cn to QueueEx1--><!--MD5=[7c743170056659c2a805bdfa898bff9b]
+link ms to QueueEx1--><path d="M240,92.63 C250.07,67.94 270.09,30.71 302.5,18.72 C330.84,8.23 342.16,8.23 370.5,18.72 C409.77,33.25 440.43,74.13 455.59,97.93 " fill="none" id="ms-to-QueueEx1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="458.41,102.45,457.0232,92.6993,455.7562,98.2124,450.243,96.9454,458.41,102.45" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[5c0123befa8c2945b16f95110e345f20]
+link QueueEx1 to Ex1--><path d="M512.31,115.72 C522.29,115.72 532.28,115.72 542.26,115.72 " fill="none" id="QueueEx1-to-Ex1" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="547.48,115.72,538.48,111.72,542.48,115.72,538.48,119.72,547.48,115.72" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[b27d9c0d5a1b7b6c8ad07af8f33af5f9]
+link ms to store--><path d="M267.29,132.05 C299.51,146.53 348.06,169.58 388,193.72 C423.91,215.42 462.44,244.14 488.55,264.49 " fill="none" id="ms-to-store" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="492.63,267.69,488.023,258.9851,488.6979,264.6015,483.0815,265.2764,492.63,267.69" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[a47d9355681cdb09a7ef1c33c470aeeb]
+link ms2 to store--><path d="M360.55,138.98 C394.45,171.03 456.87,230.04 492.73,263.94 " fill="none" id="ms2-to-store" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="496.54,267.54,492.7455,258.4515,492.9057,264.106,487.2511,264.2663,496.54,267.54" style="stroke:#A80036;stroke-width:1.0;"/><!--MD5=[bf02e0c6ac57131b07c5bd6fe5164ae8]
+link store to rabbit--><path d="M449.39,290.72 C425.64,290.72 399.43,290.72 376.7,290.72 " fill="none" id="store-to-rabbit" style="stroke:#A80036;stroke-width:1.0;"/><polygon fill="#A80036" points="371.6,290.72,380.6,294.72,376.6,290.72,380.6,286.72,371.6,290.72" style="stroke:#A80036;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="41" x="390" y="283.7869">Deltas</text><!--MD5=[b456b14b388b50862de9708dec4cc8a8]
+@startuml
+'!pragma layout smetana
+!pragma horizontalLineBetweenDifferentPackageAllowed
+
+component "cloud-native" as cn {
+  [ms1] as ms #LightBlue
+  [ms2] as ms2 #LightBlue
+
+  [<<cluster>>\nSolr] as solr
+  [<<cluster>>\nRabbitMQ] as rabbit
+  
+  ms -d-> solr : query
+  ms -r-> ms2
+  solr <-r- rabbit : update index
+}
+
+queue "QueueEx1" 
+component "Ex1"
+cn -[hidden]r- QueueEx1
+
+database "<<cluster>>\nOracle" {
+    [common store] as store
+}
+
+ms -r-> QueueEx1
+QueueEx1 -> Ex1
+ms - -> store
+ms2 - -> store
+store - -> rabbit: Deltas
+
+@enduml
+
+@startuml
+!pragma horizontalLineBetweenDifferentPackageAllowed
+
+component "cloud-native" as cn {
+  [ms1] as ms #LightBlue
+  [ms2] as ms2 #LightBlue
+
+  [<<cluster>>\nSolr] as solr
+  [<<cluster>>\nRabbitMQ] as rabbit
+  
+  ms -d-> solr : query
+  ms -r-> ms2
+  solr <-r- rabbit : update index
+}
+
+queue "QueueEx1" 
+component "Ex1"
+cn -[hidden]r- QueueEx1
+
+database "<<cluster>>\nOracle" {
+    [common store] as store
+}
+
+ms -r-> QueueEx1
+QueueEx1 -> Ex1
+ms - -> store
+ms2 - -> store
+store - -> rabbit: Deltas
+
+@enduml
+
+PlantUML version 1.2021.9(Sun Jul 25 12:13:56 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: de
+Country: DE
+--></g></svg>
