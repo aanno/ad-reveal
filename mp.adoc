@@ -30,11 +30,11 @@
 
 == Re Cloud Infrastructure
 
-image::mp/cloud-infrastructure.comp.svg[size=700]
+image::mp/cloud-infrastructure.comp.svg[Embedded,700,opts=inline]
 
 == Re Microservices
 
-image::mp/cloud-mservices.comp.svg[size=700]
+image::mp/cloud-mservices.comp.svg[Embedded,700,opts=inline]
 
 == Wroomer
 
@@ -44,4 +44,4 @@ image::mp/cloud-mservices.comp.svg[size=700]
 
 == Wroomer Architecture
 
-image::mp/wr-node.deploy.svg[scale=.7]
+image::mp/wr-node.deploy.svg[Embedded,400,opts=interactive]
