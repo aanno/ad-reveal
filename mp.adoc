@@ -1,0 +1,47 @@
+= Projects
+:customcss: my-css.css
+:source-highlighter: highlightjs
+:icons: font
+:imagesdir: assets
+:revealjs_theme: solarized
+:revealjs_slideNumber: h.v
+:revealjs_fragments: true
+:revealjs_fragmentInURL: true
+:revealjs_history: true
+:highlightjs-theme: node_modules/highlight.js/styles/github.css
+:revealjs_plugin_math: enabled
+:revealjs_plugin_highlight: enabled
+// must be enabled manually (tp)
+:revealjs_plugin_markdown: disabled
+:revealjs_plugin_multiplex: enabled
+:revealjs_plugin_pdf: enabled
+:revealjs_plugins: reveal-plugins.js
+:revealjs_plugins_configuration: reveal-plugins-config.js
+:twitter-tag: @jensschauder
+:conference-tag: @JUGNBG
+:talk-tag: #sd-jdbc
+// :stem: asciimath
+
+== Re
+
+* Technical migration of complex monolith
+* Cloud-agnostic, based on JHipser/Spring-Cloud
+* Private cloud
+
+== Re Cloud Infrastructure
+
+image::mp/cloud-infrastructure.comp.svg[size=700]
+
+== Re Microservices
+
+image::mp/cloud-mservices.comp.svg[size=700]
+
+== Wroomer
+
+* Calculate 1M loan and leasing rates at night
+* Import 400k second hand vehicles
+* Rules for routing client to banking partner
+
+== Wroomer Architecture
+
+image::mp/wr-node.deploy.svg[scale=.7]
