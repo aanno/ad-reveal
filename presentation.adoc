@@ -13,8 +13,10 @@
 :revealjs_plugin_highlight: enabled
 // must be enabled manually (tp)
 :revealjs_plugin_markdown: disabled
-:revealjs_plugin_multiplex: enabled
+:revealjs_plugin_multiplex: disabled
 :revealjs_plugin_pdf: enabled
+:revealjs_plugin_zoom: enabled
+:revealjs_plugin_notes: enabled
 :revealjs_plugins: reveal-plugins.js
 :revealjs_plugins_configuration: reveal-plugins-config.js
 :twitter-tag: @jensschauder

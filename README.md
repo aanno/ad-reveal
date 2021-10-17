@@ -107,6 +107,13 @@ TeX: { equationNumbers: { autoNumber: "none" } }
 * https://medium.com/@AidThompsin/how-to-npm-link-to-a-local-version-of-your-dependency-84e82126667a (npm)
 * https://www.viget.com/articles/how-to-use-local-unpublished-node-packages-as-project-dependencies/ (yarn)
 
+### TODOs
+
+* `light-server` is deprecated, use https://github.com/johnpapa/lite-server or https://vitejs.dev/guide/
+* Automatic build would be great! Perhaps https://github.com/yuanchuan/node-watch or https://github.com/remy/nodemon could help.
+* (pdf-print)[https://revealjs.com/pdf-export/] does not work. Find out why (or use https://github.com/astefanutti/decktape).
+* 
+
 ### References
 
 * https://asciidoctor.org/docs/asciidoctor-revealjs/
