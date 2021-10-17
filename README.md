@@ -52,6 +52,15 @@ and direct your browser to http://localhost:4000
 * https://docs.asciidoctor.org/reveal.js-converter/latest/converter/revealjs-plugins/ (asciidoctor-reveal.js)
 * https://revealjs.com/plugins/ (reveal.js)
 
+#### PDF Slide
+
+The reveal PDF method is _not_ working. Use `decktape` - but with the `generic` method as is:
+
+```bash
+mkdir screenshots
+./node_modules/.bin/decktape generic --screenshots-size 1024x768 --screenshots -s 1024x768 --chrome /usr/bin/google-chrome  http://localhost:4000/presentation.html presentation.pdf
+```
+
 #### MathJax3
 
 Problems related to reveal:
