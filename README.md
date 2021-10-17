@@ -112,7 +112,7 @@ TeX: { equationNumbers: { autoNumber: "none" } }
 * `light-server` is deprecated, use https://github.com/johnpapa/lite-server or https://vitejs.dev/guide/
 * Automatic build would be great! Perhaps https://github.com/yuanchuan/node-watch or https://github.com/remy/nodemon could help.
 * (pdf-print)[https://revealjs.com/pdf-export/] does not work. Find out why (or use https://github.com/astefanutti/decktape).
-* 
+* Enable additional plugins from https://github.com/asciidoctor/asciidoctor-reveal.js/tree/master/examples/revealjs-plugins
 
 ### References
 
