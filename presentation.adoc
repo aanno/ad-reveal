@@ -129,8 +129,6 @@ Choose from three transition speeds: default, fast or slow!
 * revealed
 * gradually
 
-
-
 == Slide Five
 
 Uses highlighted code

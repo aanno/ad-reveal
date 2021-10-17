@@ -1,3 +1,6 @@
+# ad-reveal
+Author: Thomas Pasch
+
 This is a simple template for setting up slides based on the great asciidoctor-reveal project.
 
 Some feature supported by this template/example:
@@ -29,6 +32,12 @@ The resulting `*.html` file only renders in browser _if served by a server_. The
 
 and direct your browser to http://localhost:4000
 
+### Examples
+
+* `presentation.adoc` contains basic use-cases
+* https://github.com/asciidoctor/asciidoctor-reveal.js/tree/master/examples contains more feature-specific examples
+* https://github.com/hakimel/reveal.js/tree/master/examples contains reveal examples (no asciidoc!)
+
 ### FAQs
 
 #### Configuration
@@ -56,6 +65,11 @@ Problems related to asciidoctor:
 * https://github.com/tani/asciidoctor-mathjax3
 
 But I could not get this to work...
+
+#### Kroki
+
+* https://github.com/Mogztter/asciidoctor-kroki
+* https://github.com/asciidoctor/asciidoctor-reveal.js/issues/366
 
 #### Reveal Version
 
@@ -100,4 +114,5 @@ TeX: { equationNumbers: { autoNumber: "none" } }
 * https://docs.asciidoctor.org/reveal.js-converter/latest/
 * https://docs.asciidoctor.org/reveal.js-converter/latest/setup/node-js-setup/
 * https://revealjs.com/math/ reveal.js math support documentation
+* https://github.com/rajgoel/reveal.js-plugins collection of plugins for reveal
 * https://github.com/Ardemius/asciidoctor-presentation (old) Some tips and tricks using asciidoctor in conjuction with docker, DZSlides or deck.js.
