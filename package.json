@@ -17,6 +17,6 @@
         "mathjax": "^2.7.9"
     },
     "devDependencies": {
-        "decktape": "^3.2.0"
+        "decktape": "^3.7.0"
     }
 }
